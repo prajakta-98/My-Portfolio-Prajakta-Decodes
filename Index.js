@@ -412,7 +412,20 @@ function startHelloCycler() {
 
   setInterval(cycleHello, 2200);
 }
-
+// ── PROJECT HOVER PREVIEW ────────────────────────────────────────
+const preview=document.getElementById('project-preview');
+const previewImg=document.getElementById('preview-img');
+document.querySelectorAll('.project-item').forEach(item=>{
+  const imgSrc=item.dataset.img;
+  item.addEventListener('mouseenter',()=>{
+    previewImg.src=imgSrc;preview.style.opacity='1';
+  });
+  item.addEventListener('mouseleave',()=>{preview.style.opacity='0'});
+  item.addEventListener('mousemove',(e)=>{
+    preview.style.left=e.clientX+'px';
+    preview.style.top=e.clientY-40+'px';
+  });
+});
 // Passion block animations
 gsap.utils.toArray(".passion-block").forEach((block) => {
   const label = block.querySelector(".passion-label");
@@ -712,3 +725,22 @@ if ("IntersectionObserver" in window) {
 // LOG READY
 // ═══════════════════════════════════════════════════════════
 console.log("✓ Portfolio loaded - Ready to impress!");
+
+// ═══════════════════════════════════════════════════════════
+// FOOTER PILL DROP ANIMATION
+// ═══════════════════════════════════════════════════════════
+const initFooterAnimation = () => {
+  const pillContainer = document.getElementById("pills-trigger");
+
+  if (!pillContainer) return;
+
+  ScrollTrigger.create({
+    trigger: pillContainer,
+    start: "top 88%",
+    once: true,
+    onEnter: () => pillContainer.classList.add("is-visible"),
+  });
+};
+
+// Call the function
+document.addEventListener("DOMContentLoaded", initFooterAnimation);
