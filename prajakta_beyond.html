@@ -180,12 +180,12 @@
         <h2 class="work-h2">SELECTED<br>WORK</h2>
       </div>
       <p class="work-copy">
-        A sharper editorial layout with the same cursor-follow preview interaction, so the section feels upgraded without losing the original behavior.
+        Hover a folder to pull the case file forward. The floating preview stays active, and the click transition is ready once you attach live project links.
       </p>
     </div>
 
     <div class="work-grid">
-      <article class="project-item project-item-featured reveal" tabindex="0" data-img="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80">
+      <article class="project-item project-item-featured reveal" tabindex="0" role="link" aria-label="Open Nebula Commerce case study" data-link="" data-img="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80" style="--folder-width:94%; --folder-shift:0%; --tab-shift:10%; --folder-bg:linear-gradient(180deg, rgba(245, 238, 216, 0.99) 0%, rgba(237, 228, 197, 0.95) 100%); --folder-glow:rgba(245, 200, 66, 0.14);">
         <div class="project-shell">
           <div class="project-topline">
             <span class="project-num">01</span>
@@ -205,7 +205,7 @@
         <span class="project-arrow">↗</span>
       </article>
 
-      <article class="project-item reveal" tabindex="0" data-img="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=900&q=80">
+      <article class="project-item reveal" tabindex="0" role="link" aria-label="Open Axiom Studios case study" data-link="" data-img="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=900&q=80" style="--folder-width:72%; --folder-shift:24%; --tab-shift:56%; --folder-bg:linear-gradient(180deg, rgba(242, 234, 255, 0.98) 0%, rgba(228, 214, 248, 0.94) 100%); --folder-glow:rgba(123, 47, 255, 0.16);">
         <div class="project-shell">
           <div class="project-topline">
             <span class="project-num">02</span>
@@ -225,7 +225,7 @@
         <span class="project-arrow">↗</span>
       </article>
 
-      <article class="project-item reveal" tabindex="0" data-img="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&q=80">
+      <article class="project-item reveal" tabindex="0" role="link" aria-label="Open Flux Fintech case study" data-link="" data-img="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&q=80" style="--folder-width:78%; --folder-shift:14%; --tab-shift:52%; --folder-bg:linear-gradient(180deg, rgba(233, 244, 241, 0.98) 0%, rgba(214, 235, 229, 0.94) 100%); --folder-glow:rgba(45, 212, 191, 0.16);">
         <div class="project-shell">
           <div class="project-topline">
             <span class="project-num">03</span>
@@ -245,7 +245,7 @@
         <span class="project-arrow">↗</span>
       </article>
 
-      <article class="project-item reveal" tabindex="0" data-img="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=900&q=80">
+      <article class="project-item reveal" tabindex="0" role="link" aria-label="Open Vanta Brand Co case study" data-link="" data-img="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=900&q=80" style="--folder-width:92%; --folder-shift:0%; --tab-shift:32%; --folder-bg:linear-gradient(180deg, rgba(245, 238, 216, 0.99) 0%, rgba(237, 228, 197, 0.95) 100%); --folder-glow:rgba(245, 200, 66, 0.12);">
         <div class="project-shell">
           <div class="project-topline">
             <span class="project-num">04</span>
@@ -265,7 +265,7 @@
         <span class="project-arrow">↗</span>
       </article>
 
-      <article class="project-item reveal" tabindex="0" data-img="https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=900&q=80">
+      <article class="project-item reveal" tabindex="0" role="link" aria-label="Open Pulse Fitness App case study" data-link="" data-img="https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=900&q=80" style="--folder-width:70%; --folder-shift:22%; --tab-shift:54%; --folder-bg:linear-gradient(180deg, rgba(241, 236, 248, 0.98) 0%, rgba(229, 221, 241, 0.94) 100%); --folder-glow:rgba(123, 47, 255, 0.12);">
         <div class="project-shell">
           <div class="project-topline">
             <span class="project-num">05</span>
@@ -1615,11 +1615,14 @@ const projectPreview = document.getElementById("project-preview");
 const previewImg = document.getElementById("preview-img");
 
 if (projectPreview && previewImg) {
+  const workGrid = document.querySelector(".work-grid");
+
   document.querySelectorAll(".project-item").forEach((item) => {
     const imgSrc = item.dataset.img;
-    if (!imgSrc) return;
+    const targetUrl = item.dataset.link?.trim();
 
     const showPreview = () => {
+      if (!imgSrc) return;
       previewImg.src = imgSrc;
       projectPreview.style.opacity = "1";
     };
@@ -1635,6 +1638,44 @@ if (projectPreview && previewImg) {
     item.addEventListener("mousemove", (e) => {
       projectPreview.style.left = `${e.clientX}px`;
       projectPreview.style.top = `${e.clientY - 40}px`;
+    });
+
+    const openProject = () => {
+      if (item.classList.contains("is-opening")) return;
+
+      const rect = item.getBoundingClientRect();
+      document.body.style.setProperty("--route-x", `${rect.left + rect.width / 2}px`);
+      document.body.style.setProperty("--route-y", `${rect.top + rect.height / 2}px`);
+      document.body.classList.add("project-routing");
+      workGrid?.classList.add("is-transitioning");
+      projectPreview.style.opacity = "0";
+
+      document.querySelectorAll(".project-item").forEach((card) => {
+        card.classList.toggle("is-dimming", card !== item);
+      });
+
+      item.classList.add("is-opening");
+
+      window.setTimeout(() => {
+        if (targetUrl) {
+          window.location.href = targetUrl;
+          return;
+        }
+
+        item.classList.remove("is-opening");
+        document.body.classList.remove("project-routing");
+        workGrid?.classList.remove("is-transitioning");
+        document.querySelectorAll(".project-item").forEach((card) => {
+          card.classList.remove("is-dimming");
+        });
+      }, targetUrl ? 620 : 720);
+    };
+
+    item.addEventListener("click", openProject);
+    item.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      openProject();
     });
   });
 }
