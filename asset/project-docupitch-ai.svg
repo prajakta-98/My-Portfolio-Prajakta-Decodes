@@ -1,0 +1,35 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="48" fill="#0C0B0F"/>
+  <rect width="1200" height="900" rx="48" fill="url(#bg)"/>
+  <circle cx="238" cy="196" r="164" fill="#2DD4BF" fill-opacity="0.18"/>
+  <circle cx="1000" cy="168" r="142" fill="#7B2FFF" fill-opacity="0.22"/>
+  <circle cx="942" cy="724" r="212" fill="#F5C842" fill-opacity="0.14"/>
+  <rect x="108" y="108" width="984" height="686" rx="34" fill="#12101A" stroke="#F5EED8" stroke-opacity="0.16"/>
+  <rect x="146" y="146" width="906" height="608" rx="30" fill="#17131F"/>
+  <rect x="182" y="182" width="290" height="536" rx="28" fill="#F5EED8"/>
+  <rect x="506" y="182" width="510" height="248" rx="28" fill="#201E2D"/>
+  <rect x="506" y="458" width="244" height="260" rx="28" fill="#13111A"/>
+  <rect x="772" y="458" width="244" height="260" rx="28" fill="#13111A"/>
+  <rect x="210" y="224" width="154" height="154" rx="24" fill="#7B2FFF"/>
+  <path d="M256 300H318" stroke="#F5EED8" stroke-width="18" stroke-linecap="round"/>
+  <path d="M287 268V332" stroke="#F5EED8" stroke-width="18" stroke-linecap="round"/>
+  <rect x="210" y="414" width="196" height="18" rx="9" fill="#17131F" fill-opacity="0.16"/>
+  <rect x="210" y="448" width="162" height="18" rx="9" fill="#17131F" fill-opacity="0.16"/>
+  <rect x="210" y="482" width="188" height="18" rx="9" fill="#17131F" fill-opacity="0.16"/>
+  <rect x="542" y="220" width="204" height="18" rx="9" fill="#F5EED8" fill-opacity="0.12"/>
+  <rect x="542" y="258" width="438" height="120" rx="26" fill="#F5C842"/>
+  <rect x="542" y="494" width="172" height="18" rx="9" fill="#F5EED8" fill-opacity="0.12"/>
+  <rect x="542" y="528" width="162" height="90" rx="24" fill="#2DD4BF"/>
+  <rect x="808" y="494" width="160" height="18" rx="9" fill="#F5EED8" fill-opacity="0.12"/>
+  <rect x="808" y="528" width="162" height="18" rx="9" fill="#F5EED8" fill-opacity="0.12"/>
+  <rect x="808" y="562" width="142" height="18" rx="9" fill="#F5EED8" fill-opacity="0.12"/>
+  <text x="146" y="92" fill="#2DD4BF" font-family="Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="4">DOCUPITCH AI</text>
+  <text x="542" y="330" fill="#17131F" font-family="Arial, sans-serif" font-size="54" font-weight="700">Pitch Builder</text>
+  <text x="542" y="388" fill="#17131F" fill-opacity="0.74" font-family="Arial, sans-serif" font-size="24">Generate deck-ready narratives from product inputs.</text>
+  <defs>
+    <linearGradient id="bg" x1="118" y1="70" x2="1098" y2="836" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#11101A"/>
+      <stop offset="1" stop-color="#09080D"/>
+    </linearGradient>
+  </defs>
+</svg>

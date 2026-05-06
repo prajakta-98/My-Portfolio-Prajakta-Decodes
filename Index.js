@@ -412,20 +412,116 @@ function startHelloCycler() {
 
   setInterval(cycleHello, 2200);
 }
+// Work archive interactions
+gsap.registerPlugin(ScrollTrigger);
+
+function initWorkArchive() {
+  const archive = document.querySelector("[data-work-archive]");
+  const projectPreview = document.getElementById("project-preview");
+  const previewImg = document.getElementById("preview-img");
+  const previewTitle = document.getElementById("preview-title");
+  const previewType = document.getElementById("preview-type");
+  const cards = Array.from(document.querySelectorAll(".project-popout"));
+
+  if (!archive || !projectPreview || !previewImg || !cards.length) return;
+
+  const hidePreview = () => {
+    projectPreview.classList.remove("is-visible");
+  };
+
+  const revealArchiveNow = () => {
+    archive.classList.add("is-ready");
+    if (typeof gsap !== "undefined") {
+      gsap.set(
+        [
+          ".archive-scene-copy",
+          ".archive-eyebrow",
+          ".archive-board-head > *",
+          ".project-popout",
+          ".work-cta-rail",
+        ],
+        { clearProps: "all" },
+      );
+    }
+  };
+
+  const movePreview = (x, y) => {
+    const maxX = window.innerWidth - projectPreview.offsetWidth - 16;
+    const maxY = window.innerHeight - projectPreview.offsetHeight - 16;
+    const nextX = Math.min(Math.max(16, x), maxX);
+    const nextY = Math.min(Math.max(16, y), maxY);
+    projectPreview.style.left = `${nextX}px`;
+    projectPreview.style.top = `${nextY}px`;
+  };
+
+  const showPreview = (card) => {
+    if (window.innerWidth <= 960) return;
+
+    const imgSrc = card.dataset.preview;
+    if (!imgSrc) return;
+
+    previewImg.src = imgSrc;
+    previewImg.alt = `${card.dataset.previewTitle || "Project"} preview`;
+    if (previewTitle) previewTitle.textContent = card.dataset.previewTitle || "";
+    if (previewType) previewType.textContent = card.dataset.previewType || "";
+    projectPreview.classList.add("is-visible");
+  };
+
+  cards.forEach((card) => {
+    const href = card.getAttribute("href");
+
+    card.addEventListener("mouseenter", (event) => {
+      showPreview(card);
+      movePreview(event.clientX + 28, event.clientY - 34);
+    });
+
+    card.addEventListener("focus", () => {
+      showPreview(card);
+      const rect = card.getBoundingClientRect();
+      movePreview(rect.right + 18, rect.top + rect.height * 0.45);
+    });
+
+    card.addEventListener("mouseleave", hidePreview);
+    card.addEventListener("blur", hidePreview);
+
+    card.addEventListener("mousemove", (event) => {
+      movePreview(event.clientX + 28, event.clientY - 34);
+    });
+
+    card.addEventListener("click", (event) => {
+      if (!href) return;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (href.charAt(0) === "#" || card.dataset.workStatic === "true") {
+        hidePreview();
+        return;
+      }
+
+      event.preventDefault();
+      if (card.classList.contains("is-opening")) return;
+
+      const rect = card.getBoundingClientRect();
+      document.body.style.setProperty("--route-x", `${rect.left + rect.width / 2}px`);
+      document.body.style.setProperty("--route-y", `${rect.top + rect.height / 2}px`);
+      document.body.classList.add("project-routing");
+      archive.classList.add("is-routing");
+      hidePreview();
+
+      cards.forEach((peer) => {
+        peer.classList.toggle("is-dimming", peer !== card);
+      });
+      card.classList.add("is-opening");
+
+      window.setTimeout(() => {
+        window.location.href = href;
+      }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 160 : 560);
+    });
+  });
+
+  revealArchiveNow();
+}
+
+document.addEventListener("DOMContentLoaded", initWorkArchive);
 // ── PROJECT HOVER PREVIEW ────────────────────────────────────────
-const preview=document.getElementById('project-preview');
-const previewImg=document.getElementById('preview-img');
-document.querySelectorAll('.project-item').forEach(item=>{
-  const imgSrc=item.dataset.img;
-  item.addEventListener('mouseenter',()=>{
-    previewImg.src=imgSrc;preview.style.opacity='1';
-  });
-  item.addEventListener('mouseleave',()=>{preview.style.opacity='0'});
-  item.addEventListener('mousemove',(e)=>{
-    preview.style.left=e.clientX+'px';
-    preview.style.top=e.clientY-40+'px';
-  });
-});
 // Passion block animations
 gsap.utils.toArray(".passion-block").forEach((block) => {
   const label = block.querySelector(".passion-label");
@@ -581,12 +677,6 @@ if (contactForm) {
     }
   });
 }
-
-// ═══════════════════════════════════════════════════════════
-// MARQUEE ANIMATION
-// ═══════════════════════════════════════════════════════════
-// Already handled by CSS keyframe animation, but ensure smooth loop
-
 // ═══════════════════════════════════════════════════════════
 // TECH TAG HOVER EFFECT
 // ═══════════════════════════════════════════════════════════
@@ -660,23 +750,23 @@ document.addEventListener("keydown", (e) => {
 // ═══════════════════════════════════════════════════════════
 // TEAM CARD ANIMATIONS
 // ═══════════════════════════════════════════════════════════
-document.querySelectorAll(".team-card").forEach((card) => {
-  card.addEventListener("mouseenter", function () {
-    gsap.to(this, {
-      y: -8,
-      duration: 0.3,
-      overwrite: "auto",
-    });
-  });
+// document.querySelectorAll(".team-card").forEach((card) => {
+//   card.addEventListener("mouseenter", function () {
+//     gsap.to(this, {
+//       y: -8,
+//       duration: 0.3,
+//       overwrite: "auto",
+//     });
+//   });
 
-  card.addEventListener("mouseleave", function () {
-    gsap.to(this, {
-      y: 0,
-      duration: 0.3,
-      overwrite: "auto",
-    });
-  });
-});
+//   card.addEventListener("mouseleave", function () {
+//     gsap.to(this, {
+//       y: 0,
+//       duration: 0.3,
+//       overwrite: "auto",
+//     });
+//   });
+// });
 
 // ═══════════════════════════════════════════════════════════
 // SERVICE CARD HOVER EFFECT
