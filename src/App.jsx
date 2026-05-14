@@ -3,9 +3,9 @@ import ProjectDetailPage from "./pages/ProjectDetailPage.jsx";
 
 const projectRoutes = {
   "/projects/tyre-junction": "project1",
-  "/projects/personal-portfolio-cms": "project1",
+  "/projects/personal-portfolio-cms": "project4",
   "/projects/docupitch-ai": "project2",
-  "/projects/vedic-math-game": "project3",
+  "/projects/vedic-math-game": "project5",
   "/projects/flux-payments": "project3",
   "/project1.html": "project1",
   "/project2.html": "project2",

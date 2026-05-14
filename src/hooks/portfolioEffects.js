@@ -6,7 +6,7 @@ export function runPortfolioEffects() {
           .classList.toggle("scrolled", scrollY > 50),
       );
 
-      // ── CURSOR
+      // CURSOR
       const cur = document.getElementById("cur"),
         ring = document.getElementById("cur-ring");
       let mx = 0,
@@ -43,7 +43,7 @@ export function runPortfolioEffects() {
           });
         });
 
-      // ── WAVEFORM BARS
+      // WAVEFORM BARS
       (function () {
         const wf = document.getElementById("waveform");
         const count = 32;
@@ -58,7 +58,7 @@ export function runPortfolioEffects() {
         }
       })();
        
-// ─ DRAGGABLE STICKERS
+// DRAGGABLE STICKERS
 ["fstk1", "fstk2", "fstk3"].forEach((id) => {
   const sticker = document.getElementById(id);
   if (!sticker) return;
@@ -120,7 +120,7 @@ export function runPortfolioEffects() {
   sticker.addEventListener("pointercancel", stopDragging);
 });
  
-// ─ FORM
+// FORM
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const loaderStart = performance.now();
 const loaderEl = document.getElementById("site-loader");
@@ -275,7 +275,7 @@ function startHelloCycler() {
   const helloCycler = document.querySelector(".hello-cycler");
   if (!helloCycler) return;
 
-  // Collect words — use Array.from so multi-byte unicode chars count as 1
+  // Collect words - use Array.from so multi-byte unicode chars count as 1
   const words = Array.from(helloCycler.querySelectorAll(".hello-word")).map((el) => ({
     chars: Array.from(el.textContent.trim()),
     lang:  el.dataset.lang || "",
@@ -318,7 +318,7 @@ function startHelloCycler() {
       display.textContent = chars.slice(0, charIdx).join("");
 
       if (charIdx === chars.length) {
-        // Word fully typed — pause, then start deleting
+        // Word fully typed - pause, then start deleting
         pausing = true;
         setTimeout(() => { pausing = false; deleting = true; tick(); }, PAUSE_AFTER);
         return;
@@ -540,7 +540,7 @@ async function handleForm(e) {
   btn.disabled = true;
   btn.style.background = "#4a1b99";
   txt.textContent = "Sending your note...";
-  arr.textContent = "…";
+  arr.textContent = "...";
   setFormStatus("Submitting your message...", "");
   successBox.style.display = "none";
 
@@ -570,7 +570,7 @@ async function handleForm(e) {
     successBox.style.display = "block";
     btn.style.background = "#22C55E";
     txt.textContent = "Sent! Talk soon";
-    arr.textContent = "✓";
+    arr.textContent = "ok";
   } catch (error) {
     setFormStatus(error.message || "Unable to send the form right now. Please try again shortly.", "error");
     btn.style.background = "#b42318";
@@ -580,8 +580,8 @@ async function handleForm(e) {
     window.setTimeout(() => {
       btn.disabled = false;
       btn.style.background = "var(--purple)";
-      txt.textContent = "Send this note 📬";
-      arr.textContent = "→";
+      txt.textContent = "Send this note";
+      arr.textContent = "->";
     }, 1400);
   }
 }
@@ -617,16 +617,16 @@ if (contactForm) {
   });
 }
  
-// ─ RESUME DOWNLOAD (placeholder — swap in your actual PDF URL)
+// RESUME DOWNLOAD (placeholder - swap in your actual PDF URL)
 
 document.getElementById('resume-btn').addEventListener('click',function(e){
   // Replace the href below with your actual hosted resume PDF link:
   // this.href = 'https://your-domain.com/prajakta-bansod-resume.pdf';
-  alert('📄 To enable resume download: replace the href in the resume button with your PDF URL.\nExample: https://yourname.com/resume.pdf');
+  alert('To enable resume download: replace the href in the resume button with your PDF URL.\nExample: https://yourname.com/resume.pdf');
   e.preventDefault();
 });
 
-      // ── GSAP HERO ENTRANCE
+      // GSAP HERO ENTRANCE
 if (false) {
       gsap.registerPlugin(ScrollTrigger);
 
@@ -678,7 +678,7 @@ if (false) {
         });
       });
 
-      // ── POLAROID hover tilt
+      // POLAROID hover tilt
       document.querySelectorAll(".polaroid").forEach((pol, i) => {
         const base = ["-8deg", "5deg", "2deg", "-6deg"][i] || "0deg";
         pol.addEventListener("mousemove", (e) => {

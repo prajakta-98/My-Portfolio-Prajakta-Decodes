@@ -48,7 +48,7 @@ export default function Navigation() {
       <div className="nav-panel" id="nav-panel">
         <div className="nav-panel-inner">
           <ul className="nav-links">
-            <li><a href="#about" onClick={closeMenu}>Get to know me</a></li>
+            <li><a href="#beyond" onClick={closeMenu}>Get to know me</a></li>
             <li><a href="#work" onClick={closeMenu}>Work</a></li>
             <li><a href="#services" onClick={closeMenu}>Services</a></li>
             <li><a href="#contact" onClick={closeMenu}>Contact</a></li>

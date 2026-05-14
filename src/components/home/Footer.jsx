@@ -7,7 +7,7 @@ export default function Footer() {
           <div className="footer-nav-links">
             <a href="#work">Work</a>
             <a href="#services">Services</a>
-            <a href="#about">About</a>
+            <a href="#beyond-code">Beyond Code</a>
             <a href="#contact">Contact</a>
           </div>
         </div>
@@ -46,7 +46,7 @@ export default function Footer() {
           <p>&copy; 2026 Prajakta. Designed with precision.</p>
           <div className="footer-links">
             <a href="#work">Work</a>
-            <a href="#about">About</a>
+            <a href="#beyond-code">Beyond Code</a>
           </div>
         </div>
       </div>
