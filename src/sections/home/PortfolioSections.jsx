@@ -75,11 +75,11 @@ export default function PortfolioSections() {
 
             <div className="intro-eyebrow">
               <span className="dot"></span>
-              Available for React, MERN and UI/UX projects
+              Full-Stack UI Developer
             </div>
 
             <h1 className="intro-direct-h1">
-              I design and build client-ready web experiences.
+              Building visually engaging React &amp; MERN web experiences.
             </h1>
 
             <h3 className="intro-h1" aria-label="Hello">
@@ -115,11 +115,10 @@ export default function PortfolioSections() {
             </div>
 
             <div className="intro-about-blocks">
-              <p className="intro-about-line ia1">
-                <span className="ia-kicker">I am</span>
-                <strong>Prajakta Bansod,</strong> a full-stack developer who
-                turns product ideas into clear interfaces, reusable React
-                components, and practical MERN applications.
+              <p className="intro-about-line intro-hero-support ia1">
+                I design and develop responsive websites, dashboards, landing
+                pages, and full-stack interfaces for brands, startups, and
+                growing businesses.
               </p>
               <p className="intro-about-line ia2">
                 <span className="ia-kicker">Ever since</span> I started building
@@ -128,25 +127,33 @@ export default function PortfolioSections() {
                 minimal interaction to the most elaborate UI.
               </p>
               <p className="intro-about-line ia3">
-                <span className="ia-kicker">Good fit for</span> freelance
-                websites, landing pages, dashboards, UI/UX to code conversion,
-                and full-stack product builds.
+                <span className="ia-kicker">Available for</span> freelance
+                websites, dashboards, landing pages, UI/UX to code conversion,
+                and MERN product builds.
               </p>
             </div>
 
             <div className="intro-role-strip">
-              <span>React Developer</span>
+              <span>React</span>
               <span className="intro-role-dot">*</span>
-              <span>UI / UX</span>
+              <span>MERN Stack</span>
               <span className="intro-role-dot">*</span>
-              <span>Fullstack</span>
+              <span>Dashboards</span>
               <span className="intro-role-dot">*</span>
-              <span>Creative Coder</span>
+              <span>Landing Pages</span>
             </div>
 
             <div className="intro-cta-row">
               <a href="#work" className="intro-primary-cta">
-                View Work
+                View Projects
+              </a>
+              <a
+                href="https://drive.google.com/file/d/13RQkO5hJcCe2cM1Dp0rHXczJkI5oEKQb/view?usp=drive_link"
+                className="intro-resume-cta"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Download Resume
               </a>
               <a href="#contact" className="intro-secondary-cta">
                 Hire Me
@@ -156,8 +163,8 @@ export default function PortfolioSections() {
         </div>
 
         <WorkSection />
-        <BeyondCodeSection />
         <ServicesSection />
+        <BeyondCodeSection />
         <ContactSection />
         <FinalCtaSection />
       </section>

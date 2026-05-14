@@ -4,54 +4,72 @@ export const services = [
     icon: "design",
     name: "UI/UX Design",
     description:
-      "Figma wireframes, interactive prototypes and design systems that convert. Pixel-perfect, mobile-first, user-centred - proven on DocuPitch, Tyre Junction and more.",
+      "Turn rough ideas into clear user flows, wireframes, and polished interfaces that feel easy to use.",
+    outcome: "Clearer product experience",
     price: "Starting at Rs.8,000",
     unit: "/ project",
+    brief:
+      "Best when you need wireframes, visual direction, or a cleaner user journey before development starts.",
   },
   {
     number: "02",
     icon: "code",
-    name: "Full-Stack Dev",
+    name: "Web Development",
     description:
-      "React + Node.js + MongoDB + Express. From REST APIs to full dashboards, JWT auth, protected routes and reusable component libraries - clean, scalable code.",
-    price: "Starting at Rs.15,000",
-    unit: "/ project",
+      "Build responsive React websites with clean components, smooth interactions, and production-ready layouts.",
+    outcome: "Fast, responsive websites",
+    price: "Starting at Rs.12,000",
+    unit: "/ website",
+    brief:
+      "Best when you need a polished frontend built from design, content, or a clear product idea.",
   },
   {
     number: "03",
     icon: "database",
-    name: "Admin Dashboards",
+    name: "Full-Stack Apps",
     description:
-      "Role-based CMS panels, CRUD modules, stat cards, charts and slot-booking systems. Full MERN stack, secure and production-ready - like the portfolio CMS I built at SociologiQ.",
+      "Create MERN applications with APIs, authentication, database workflows, and reusable frontend systems.",
+    outcome: "End-to-end product builds",
     price: "Starting at Rs.20,000",
-    unit: "/ project",
+    unit: "/ app",
+    brief:
+      "Best when your project needs frontend, backend, database, protected routes, and API workflows together.",
   },
   {
     number: "04",
     icon: "layout",
     name: "Landing Pages",
     description:
-      "High-converting landing pages with stunning UI, micro-animations and SEO-friendly structure. Delivered fast - typically 5-7 working days from Figma to deployed.",
+      "Design and develop focused pages that explain the offer clearly and guide visitors toward action.",
+    outcome: "Better first impression",
     price: "Starting at Rs.6,000",
     unit: "/ page",
+    brief:
+      "Best when you need a quick, high-impact page for a launch, campaign, service, or personal brand.",
   },
   {
     number: "05",
     icon: "monitor",
-    name: "Desktop Apps",
+    name: "Dashboards",
     description:
-      "Python + PySide6/Qt desktop applications with rich UI, role-based access and data-export features. Already shipped the Vedic Maths platform - cross-platform and production-ready.",
-    price: "Starting at Rs.12,000",
-    unit: "/ project",
+      "Build admin panels, CRUD screens, tables, forms, stats cards, and content management workflows.",
+    outcome: "Organized operations",
+    price: "Starting at Rs.20,000",
+    unit: "/ dashboard",
+    brief:
+      "Best when you need a practical internal tool for managing content, bookings, users, or records.",
   },
   {
     number: "06",
     icon: "launch",
-    name: "MVP to Launch",
+    name: "Tech & App Features",
     description:
-      "Got a napkin idea? I'll help you scope, design and ship an MVP in 2-4 weeks. One person, full ownership, zero handoff chaos. Let's validate your idea fast.",
-    price: "Starting at Rs.25,000",
-    unit: "/ MVP",
+      "Add practical features like booking flows, filters, protected routes, forms, and API integrations.",
+    outcome: "Useful product functionality",
+    price: "Starting at Rs.5,000",
+    unit: "/ feature",
+    brief:
+      "Best when you already have a product and need a specific feature designed, built, or improved.",
   },
 ];
 

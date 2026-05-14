@@ -4,7 +4,7 @@ const workProjects = [
     title: "Personal portfolio CMS",
     description:
       "An admin dashboard for managing content, projects and blog posts on my personal portfolio site, built with React and Node.js for seamless updates.",
-    href: "/projects/personal-portfolio-cms/",
+    href: "/projects/personal-portfolio-cms",
     tags: ["React UI", "Node.js", "CMS"],
     cta: "Open case study",
   },
@@ -13,7 +13,7 @@ const workProjects = [
     title: "Automation Service Platform",
     description:
       "A conversion-focused automotive storefront with category clarity, fast product discovery and inquiry-ready purchase flows.",
-    href: "/projects/tyre-junction/",
+    href: "/projects/tyre-junction",
     tags: ["React UI", "Lead Capture", "Design System"],
     cta: "Open case study",
   },
@@ -22,7 +22,7 @@ const workProjects = [
     title: "DocuPitch AI",
     description:
       "An LLM-assisted workflow that turns raw inputs into polished pitch narratives, decks and investor-facing product stories.",
-    href: "/projects/docupitch-ai/",
+    href: "/projects/docupitch-ai",
     tags: ["UX Strategy", "Prompt Flows", "Dashboard UI"],
     cta: "Open case study",
   },
@@ -31,7 +31,7 @@ const workProjects = [
     title: "Vedic Math Game",
     description:
       "A Python-based educational game that makes learning Vedic math interactive for students, with gameplay and real-time feedback.",
-    href: "/projects/vedic-math-game/",
+    href: "/projects/vedic-math-game",
     tags: ["Python", "Qt", "UI Design"],
     cta: "Open case study",
   },

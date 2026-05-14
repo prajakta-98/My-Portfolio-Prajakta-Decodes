@@ -1,10 +1,11 @@
 export function runPortfolioEffects() {
 // NAV SCROLL
-      window.addEventListener("scroll", () =>
-        document
-          .getElementById("nav")
-          .classList.toggle("scrolled", scrollY > 50),
-      );
+      const nav = document.getElementById("nav");
+      if (nav) {
+        window.addEventListener("scroll", () =>
+          nav.classList.toggle("scrolled", scrollY > 50),
+        );
+      }
 
       // CURSOR
       const cur = document.getElementById("cur"),
@@ -13,39 +14,42 @@ export function runPortfolioEffects() {
         my = 0,
         rx = 0,
         ry = 0;
-      document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        cur.style.left = mx + "px";
-        cur.style.top = my + "px";
-      });
-      (function l() {
-        rx += (mx - rx) * 0.1;
-        ry += (my - ry) * 0.1;
-        ring.style.left = rx + "px";
-        ring.style.top = ry + "px";
-        requestAnimationFrame(l);
-      })();
-      document
-        .querySelectorAll("a,.polaroid,.pl-item,.mood-tag,.stat-pill")
-        .forEach((el) => {
-          el.addEventListener("mouseenter", () => {
-            cur.style.width = "18px";
-            cur.style.height = "18px";
-            ring.style.width = "58px";
-            ring.style.height = "58px";
-          });
-          el.addEventListener("mouseleave", () => {
-            cur.style.width = "12px";
-            cur.style.height = "12px";
-            ring.style.width = "40px";
-            ring.style.height = "40px";
-          });
+      if (cur && ring) {
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          cur.style.left = mx + "px";
+          cur.style.top = my + "px";
         });
+        (function l() {
+          rx += (mx - rx) * 0.1;
+          ry += (my - ry) * 0.1;
+          ring.style.left = rx + "px";
+          ring.style.top = ry + "px";
+          requestAnimationFrame(l);
+        })();
+        document
+          .querySelectorAll("a,.polaroid,.pl-item,.mood-tag,.stat-pill")
+          .forEach((el) => {
+            el.addEventListener("mouseenter", () => {
+              cur.style.width = "18px";
+              cur.style.height = "18px";
+              ring.style.width = "58px";
+              ring.style.height = "58px";
+            });
+            el.addEventListener("mouseleave", () => {
+              cur.style.width = "12px";
+              cur.style.height = "12px";
+              ring.style.width = "40px";
+              ring.style.height = "40px";
+            });
+          });
+      }
 
       // WAVEFORM BARS
       (function () {
         const wf = document.getElementById("waveform");
+        if (!wf) return;
         const count = 32;
         for (let i = 0; i < count; i++) {
           const h = Math.round(8 + Math.random() * 42);
@@ -418,6 +422,7 @@ function clearFieldError(field) {
 function setBudgetError(message) {
   const budgetWrap = document.getElementById("cf-budget");
   const errorEl = document.getElementById("cf-budget-error");
+  if (!budgetWrap || !errorEl) return;
   budgetWrap.classList.add("is-invalid");
   errorEl.textContent = message;
 }
@@ -425,12 +430,14 @@ function setBudgetError(message) {
 function clearBudgetError() {
   const budgetWrap = document.getElementById("cf-budget");
   const errorEl = document.getElementById("cf-budget-error");
+  if (!budgetWrap || !errorEl) return;
   budgetWrap.classList.remove("is-invalid");
   errorEl.textContent = "";
 }
 
 function setFormStatus(message, type = "") {
   const status = document.getElementById("form-status");
+  if (!status) return;
   status.textContent = message;
   status.className = `form-status${type ? ` is-${type}` : ""}`;
 }
@@ -619,12 +626,15 @@ if (contactForm) {
  
 // RESUME DOWNLOAD (placeholder - swap in your actual PDF URL)
 
-document.getElementById('resume-btn').addEventListener('click',function(e){
-  // Replace the href below with your actual hosted resume PDF link:
-  // this.href = 'https://your-domain.com/prajakta-bansod-resume.pdf';
-  alert('To enable resume download: replace the href in the resume button with your PDF URL.\nExample: https://yourname.com/resume.pdf');
-  e.preventDefault();
-});
+const resumeBtn = document.getElementById("resume-btn");
+if (resumeBtn) {
+  resumeBtn.addEventListener("click", function(e) {
+    // Replace the href below with your actual hosted resume PDF link:
+    // this.href = 'https://your-domain.com/prajakta-bansod-resume.pdf';
+    alert("To enable resume download: replace the href in the resume button with your PDF URL.\nExample: https://yourname.com/resume.pdf");
+    e.preventDefault();
+  });
+}
 
       // GSAP HERO ENTRANCE
 if (false) {

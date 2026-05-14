@@ -1,7 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import CardSwap, { Card } from "../common/CardSwap/CardSwap.jsx";
 import workProjects from "../../data/workProjects.js";
 
-function openProject(event, project) {
+function openProject(event, project, navigate) {
   if (project.href.startsWith("#")) {
     document.querySelector(project.href)?.scrollIntoView({ behavior: "smooth" });
     return;
@@ -12,11 +13,14 @@ function openProject(event, project) {
   document.body.style.setProperty("--route-y", `${rect.top + rect.height / 2}px`);
   document.body.classList.add("project-routing");
   window.setTimeout(() => {
-    window.location.href = project.href;
+    navigate(project.href);
+    document.body.classList.remove("project-routing");
   }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 120 : 520);
 }
 
 export default function WorkCardSwap() {
+  const navigate = useNavigate();
+
   return (
     <div className="work-card-swap" aria-label="Selected work carousel">
       <CardSwap
@@ -35,11 +39,11 @@ export default function WorkCardSwap() {
             customClass="work-swap-card"
             role="link"
             tabIndex={0}
-            onClick={(event) => openProject(event, project)}
+            onClick={(event) => openProject(event, project, navigate)}
             onKeyDown={(event) => {
               if (event.key !== "Enter" && event.key !== " ") return;
               event.preventDefault();
-              openProject(event, project);
+              openProject(event, project, navigate);
             }}
           >
             <span className="work-swap-number">{project.number}</span>
