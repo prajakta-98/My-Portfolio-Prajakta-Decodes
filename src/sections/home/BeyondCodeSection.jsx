@@ -31,7 +31,14 @@ export default function BeyondCodeSection() {
             </div>
             <div className="photo-collage" aria-hidden="true">
               <figure className="mini-polaroid mini-polaroid-main">
-                <img src={photography.image} alt="" loading="lazy" />
+                <img
+                  src={photography.image}
+                  alt=""
+                  width="900"
+                  height="1525"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <figcaption>golden hour</figcaption>
               </figure>
               {photography.supportingImages.map((image, index) => (
@@ -39,7 +46,14 @@ export default function BeyondCodeSection() {
                   className={`mini-polaroid mini-polaroid-${index + 2}`}
                   key={image.src}
                 >
-                  <img src={image.src} alt="" loading="lazy" />
+                  <img
+                    src={image.src}
+                    alt=""
+                    width="800"
+                    height="1422"
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <figcaption>{image.caption}</figcaption>
                 </figure>
               ))}
@@ -72,7 +86,14 @@ export default function BeyondCodeSection() {
                     <li key={detail}>{detail}</li>
                   ))}
                 </ul>
-                <img src={cooking.image} alt={cooking.imageAlt} loading="lazy" />
+                <img
+                  src={cooking.image}
+                  alt={cooking.imageAlt}
+                  width="1600"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
           </article>

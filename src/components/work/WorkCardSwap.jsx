@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import CardSwap, { Card } from "../common/CardSwap/CardSwap.jsx";
 import workProjects from "../../data/workProjects.js";
+import { scrollToTarget } from "../../hooks/useLenis.js";
 
 function openProject(event, project, navigate) {
   if (project.href.startsWith("#")) {
-    document.querySelector(project.href)?.scrollIntoView({ behavior: "smooth" });
+    scrollToTarget(project.href);
     return;
   }
 

@@ -6,6 +6,8 @@ const trustItems = [
   ["24h", "Average reply time"],
 ];
 
+const resumePath = "/asset/prajakta-bansod-resume.pdf";
+
 export default function FinalCtaSection() {
   return (
     <section id="beyond-cta">
@@ -38,7 +40,7 @@ export default function FinalCtaSection() {
             Hire Me
           </a>
           <a
-            href="https://drive.google.com/file/d/13RQkO5hJcCe2cM1Dp0rHXczJkI5oEKQb/view?usp=drive_link"
+            href={resumePath}
             className="cta-btn-resume"
             id="resume-btn"
             download
@@ -64,7 +66,7 @@ export default function FinalCtaSection() {
             href="https://www.linkedin.com/in/prajakta-bansod/"
             className="cta-btn-g"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             View LinkedIn
           </a>

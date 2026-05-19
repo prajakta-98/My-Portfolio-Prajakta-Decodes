@@ -74,7 +74,7 @@ function ProjectLink({ label, href, placeholder }) {
       className="detail-link-card"
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
-      rel={href.startsWith("http") ? "noreferrer" : undefined}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
     >
       <span>{label}</span>
       <p>{href}</p>
@@ -122,7 +122,14 @@ export default function ProjectDetailPage() {
         </div>
 
         <div className="detail-visual">
-          <img src={project.image} alt={project.imageAlt} />
+          <img
+            src={project.image}
+            alt={project.imageAlt}
+            width="1200"
+            height="760"
+            loading="eager"
+            decoding="async"
+          />
         </div>
       </section>
 

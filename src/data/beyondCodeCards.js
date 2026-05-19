@@ -5,7 +5,7 @@ const beyondCodeCards = [
     title: "Photography",
     description: "I notice light, composition, and small visual details.",
     image: "/asset/SunsetPhoto.jpeg",
-    imageAlt: "Golden hour photograph",
+    imageAlt: "Golden hour photograph by Prajakta Bansod",
     supportingImages: [
       {
         src: "/asset/StreetLight.jpg",
@@ -26,7 +26,7 @@ const beyondCodeCards = [
     title: "Cooking",
     description: "I enjoy process, patience, and creative experimentation.",
     image: "/asset/CookingResult.jpg",
-    imageAlt: "Cooking result",
+    imageAlt: "Home-cooked dish plated by Prajakta Bansod",
     details: ["prep slowly", "taste often", "adjust freely"],
   },
   {
@@ -36,7 +36,7 @@ const beyondCodeCards = [
     description:
       "I bring rhythm, emotion, and expression into the way I create.",
     image: "/asset/PORTRAIT.jpg",
-    imageAlt: "Personal portrait",
+    imageAlt: "Portrait of Prajakta Bansod",
     details: ["rhythm", "emotion", "story"],
   },
 ];

@@ -130,7 +130,7 @@ export default function ContactSection() {
             <a
               href="https://github.com/prajakta-98"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="social-cta-link"
             >
               GitHub -&gt;
@@ -138,13 +138,18 @@ export default function ContactSection() {
             <a
               href="https://www.linkedin.com/in/prajakta-bansod/"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="social-cta-link"
             >
               LinkedIn -&gt;
             </a>
-            <a href="#" className="social-cta-link">
-              Dribbble -&gt;
+            <a
+              href="https://www.behance.net/prajaktabansod08"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-cta-link"
+            >
+              Behance -&gt;
             </a>
           </div>
         </div>
@@ -247,17 +252,23 @@ export default function ContactSection() {
                 </select>
                 <div className="f-error" id="cf-service-error" aria-live="polite"></div>
               </div>
-              <div className="f-group">
-                <label className="f-label">Approximate budget? *</label>
-                <div className="budget-opts" id="cf-budget" aria-describedby="cf-budget-error">
+              <fieldset className="f-group budget-fieldset">
+                <legend className="f-label">Approximate budget? *</legend>
+                <div
+                  className="budget-opts"
+                  id="cf-budget"
+                  role="radiogroup"
+                  aria-describedby="cf-budget-error"
+                  aria-required="true"
+                >
                   {budgetOptions.map((option) => (
                     <label className="budget-opt" key={option}>
-                      <input type="radio" name="budget" value={option} /> {option}
+                      <input type="radio" name="budget" value={option} required /> {option}
                     </label>
                   ))}
                 </div>
                 <div className="f-error" id="cf-budget-error" aria-live="polite"></div>
-              </div>
+              </fieldset>
               <div className="f-group">
                 <label className="f-label" htmlFor="cf-msg">
                   Tell me about your project *
@@ -272,8 +283,18 @@ export default function ContactSection() {
                 ></textarea>
                 <div className="f-error" id="cf-msg-error" aria-live="polite"></div>
               </div>
-              <div className="form-status" id="form-status" aria-live="polite"></div>
-              <button type="submit" className="f-submit" id="f-btn">
+              <div
+                className="form-status"
+                id="form-status"
+                role="status"
+                aria-live="polite"
+              ></div>
+              <button
+                type="submit"
+                className="f-submit"
+                id="f-btn"
+                aria-describedby="form-status"
+              >
                 <span id="f-btn-txt">Send this note</span>
                 <span id="f-btn-arrow">
                   <SiteIcon name="send" size={16} />

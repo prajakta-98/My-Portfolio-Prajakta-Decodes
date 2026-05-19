@@ -23,12 +23,32 @@
 
 @media (max-width: 768px) {
   .card-swap-container {
-    transform: scale(0.75) translate(25%, 25%);
+    position: relative;
+    right: auto;
+    bottom: auto;
+    display: grid;
+    gap: 1rem;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    perspective: none;
+    overflow: visible;
+  }
+
+  .card {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    transform-style: flat;
+    will-change: auto;
   }
 }
 
 @media (max-width: 480px) {
   .card-swap-container {
-    transform: scale(0.55) translate(25%, 25%);
+    transform: none !important;
   }
 }

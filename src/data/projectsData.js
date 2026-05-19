@@ -16,7 +16,7 @@ const projectsData = {
       github: "",
     },
     image: "/asset/project-tyre-junction.svg",
-    imageAlt: "Tyre Junction preview",
+    imageAlt: "Tyre Junction automotive storefront project preview",
     problem:
       "Buyers need to compare tyre options quickly, but dense catalogue layouts make discovery and enquiry harder than necessary.",
     solution:
@@ -51,7 +51,7 @@ const projectsData = {
       github: "",
     },
     image: "/asset/project-docupitch-ai.svg",
-    imageAlt: "DocuPitch AI preview",
+    imageAlt: "DocuPitch AI onboarding and dashboard project preview",
     problem:
       "Founders often have scattered notes but need a clear, investor-ready story without wrestling with open-ended prompt forms.",
     solution:
@@ -86,7 +86,7 @@ const projectsData = {
       github: "",
     },
     image: "/asset/project-flux-payments.svg",
-    imageAlt: "Flux Payments preview",
+    imageAlt: "Flux Payments fintech dashboard interface preview",
     problem:
       "Add the verified project problem statement here once this case study is ready.",
     solution:
@@ -121,7 +121,7 @@ const projectsData = {
       github: "",
     },
     image: "/asset/project-tyre-junction.svg",
-    imageAlt: "Portfolio CMS preview",
+    imageAlt: "Portfolio CMS admin dashboard project preview",
     problem:
       "The owner needs a faster way to manage project details, content blocks, and page updates without touching frontend code every time.",
     solution:
@@ -157,7 +157,7 @@ const projectsData = {
       github: "",
     },
     image: "/asset/project-flux-payments.svg",
-    imageAlt: "Vedic Math Game preview",
+    imageAlt: "Vedic Math Game learning interface project preview",
     problem:
       "Students and admins need an engaging learning interface with clear gameplay and controlled access for different user roles.",
     solution:

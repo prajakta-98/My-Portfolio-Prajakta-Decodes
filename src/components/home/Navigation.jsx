@@ -30,7 +30,7 @@ export default function Navigation() {
 
   return (
     <nav id="nav" className={menuOpen ? "menu-open" : ""}>
-      <a href="#" className="nav-logo" onClick={closeMenu}>
+      <a href="#beyond" className="nav-logo" onClick={closeMenu}>
         <span className="nav-logo-text">{"{Praj-Decodes}"}</span>
       </a>
       <button
