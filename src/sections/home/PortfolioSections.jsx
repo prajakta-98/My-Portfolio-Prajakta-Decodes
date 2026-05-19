@@ -78,6 +78,7 @@ const heroPopupImages = [
   "/asset/Sticker2.png",
   "/asset/Sticker6.png",
   "/asset/Sticker5.png",
+  "/asset/CandidMoment.jpg",
 ];
 
 const heroWords = heroHeadline.split(" ").map((text, index) => ({
@@ -170,6 +171,10 @@ const revealPixels = heartPixels.map(([col, row], index) => ({
   delay: `${index * 0.014}s`,
 }));
 
+const HERO_PHYSICS_EXPAND_MS = 700;
+const HERO_PHYSICS_RELEASE_MS = 900;
+const HERO_PHYSICS_STEP = 1000 / 60;
+
 function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
   useEffect(() => {
     if (!isActive || !stageRef.current) return undefined;
@@ -207,8 +212,11 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
     }
 
     const engine = Matter.Engine.create({
-      gravity: { x: 0, y: 1.85, scale: 0.00112 },
+      gravity: { x: 0, y: 1.5, scale: 0.00102 },
     });
+    engine.positionIterations = 9;
+    engine.velocityIterations = 7;
+    engine.constraintIterations = 4;
     const world = engine.world;
 
     const wallCount = 64;
@@ -248,10 +256,10 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
         bodyHeight,
         {
           chamfer: { radius: Math.min(8, bodyHeight * 0.22) },
-          restitution: 0.24,
-          friction: 0.82,
+          restitution: 0.16,
+          friction: 0.88,
           frictionStatic: 0.9,
-          frictionAir: 0.035,
+          frictionAir: 0.052,
           density: 0.0034,
           angle: ((index % 9) - 4) * 0.12,
         },
@@ -269,8 +277,8 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
     const mouseConstraint = Matter.MouseConstraint.create(engine, {
       mouse,
       constraint: {
-        stiffness: 0.18,
-        damping: 0.06,
+        stiffness: 0.14,
+        damping: 0.12,
         render: { visible: false },
       },
     });
@@ -284,9 +292,10 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
         activeBodies.push(item);
         Matter.Composite.add(world, item.body);
         syncBodies();
-      }, index * 24),
+      }, index * 18),
     );
     let lastTime = performance.now();
+    let accumulator = 0;
     const syncBodies = () => {
       setBodies(
         activeBodies.map((item) => ({
@@ -299,9 +308,13 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
       );
     };
     const tick = (time) => {
-      const delta = Math.min(32, time - lastTime);
+      const delta = Math.min(48, time - lastTime);
       lastTime = time;
-      Matter.Engine.update(engine, delta);
+      accumulator += delta;
+      while (accumulator >= HERO_PHYSICS_STEP) {
+        Matter.Engine.update(engine, HERO_PHYSICS_STEP);
+        accumulator -= HERO_PHYSICS_STEP;
+      }
       syncBodies();
       frameId = requestAnimationFrame(tick);
     };
@@ -328,7 +341,7 @@ export default function PortfolioSections() {
   const physicsActive = physicsMode !== "idle";
 
   useHeroPhysics(
-    physicsMode === "expanding" || physicsMode === "collecting",
+    physicsMode === "collecting",
     physicsStageRef,
     letterRefs,
     setPhysicsBodies,
@@ -353,7 +366,7 @@ export default function PortfolioSections() {
     phaseTimersRef.current = [
       window.setTimeout(() => {
         setPhysicsMode("collecting");
-      }, 520),
+      }, HERO_PHYSICS_EXPAND_MS),
     ];
   };
 
@@ -363,9 +376,9 @@ export default function PortfolioSections() {
     setPhysicsMode("releasing");
     phaseTimersRef.current = [
       window.setTimeout(() => {
-      setPhysicsBodies([]);
-      setPhysicsMode("idle");
-      }, 760),
+        setPhysicsBodies([]);
+        setPhysicsMode("idle");
+      }, HERO_PHYSICS_RELEASE_MS),
     ];
   };
 
@@ -438,16 +451,6 @@ export default function PortfolioSections() {
               ></span>
             ))}
           </div>
-
-          {/* <motion.div
-            className="kinetic-polaroid kinetic-reveal"
-            whileHover={{ y: -6, rotate: -2, scale: 1.025 }}
-            transition={{ type: "spring", stiffness: 220, damping: 18 }}
-          >
-            <img src="/asset/HeroImage.png" alt="Prajakta Bansod" />
-            <span>Prajakta, Full-stack Developer</span>
-          </motion.div> */}
-
           <div
             className={`kinetic-hero-copy is-physics-${physicsMode}`}
           >
