@@ -78,7 +78,6 @@ const heroPopupImages = [
   "/asset/Sticker2.png",
   "/asset/Sticker6.png",
   "/asset/Sticker5.png",
-  "/asset/CandidMoment.jpg",
 ];
 
 const heroWords = heroHeadline.split(" ").map((text, index) => ({
@@ -395,7 +394,7 @@ export default function PortfolioSections() {
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
           <div className="kinetic-brand hero-edge">
-            <span>Prajakta Bansod</span>
+            <span>Prajakta-Decodes</span>
             <span>Pune, India</span>
           </div>
 
@@ -541,6 +540,13 @@ export default function PortfolioSections() {
                 Building fast React experiences with careful interaction design
                 and practical full-stack delivery.
               </p>
+              {/* <div className="kinetic-tech-stack kinetic-reveal" aria-label="Core skills">
+                <span>React</span>
+                <span>MERN</span>
+                <span>UI/UX</span>
+                <span>Dashboards</span>
+                <span>Landing Pages</span>
+              </div> */}
               <button
                 type="button"
                 className="hero-collector"
@@ -583,6 +589,7 @@ export default function PortfolioSections() {
             <span>React</span>
             <span>MERN</span>
             <span>Dashboards</span>
+            <span>UI/UX</span>
             <span>Landing Pages</span>
           </div>
 

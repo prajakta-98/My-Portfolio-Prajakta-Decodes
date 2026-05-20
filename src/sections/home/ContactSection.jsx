@@ -71,6 +71,20 @@ export default function ContactSection() {
             wireframe to deployment. No middlemen, no bloat. Just clean code and
             thoughtful design.
           </p>
+          <div className="contact-identity-card">
+            <img
+              src="/asset/HeroImage.png"
+              alt="Prajakta Bansod"
+              width="320"
+              height="320"
+              loading="lazy"
+              decoding="async"
+            />
+            <div>
+              <span>Directly working with</span>
+              <strong>Prajakta Bansod</strong>
+            </div>
+          </div>
           <div className="contact-trust-panel">
             <span>Available for</span>
             <ul>

@@ -13,6 +13,11 @@ const beyondCodeCards = [
         caption: "street light",
       },
       {
+        src: "/asset/Flower2.jpg",
+        alt: "Close-up of a flower with vibrant colors",
+        caption: "flower power, up close",
+      },
+      {
         src: "/asset/Coffee.jpg",
         alt: "Coffee photograph",
         caption: "small details",
@@ -35,7 +40,7 @@ const beyondCodeCards = [
     title: "Singing",
     description:
       "I bring rhythm, emotion, and expression into the way I create.",
-    image: "/asset/PORTRAIT.jpg",
+    image: "/asset/Singing.png",
     imageAlt: "Portrait of Prajakta Bansod",
     details: ["rhythm", "emotion", "story"],
   },

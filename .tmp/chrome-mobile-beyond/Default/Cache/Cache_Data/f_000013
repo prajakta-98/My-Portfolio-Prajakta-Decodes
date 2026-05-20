@@ -1,0 +1,204 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/sections/home/ServicesSection.jsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=e5929998"; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import SiteIcon from "/src/components/common/SiteIcon.jsx";
+import { services } from "/src/data/services.js";
+export default function ServicesSection() {
+  return /* @__PURE__ */ jsxDEV("section", { id: "services", children: /* @__PURE__ */ jsxDEV("div", { className: "services-inner", children: [
+    /* @__PURE__ */ jsxDEV("div", { className: "services-top", children: [
+      /* @__PURE__ */ jsxDEV("div", { children: [
+        /* @__PURE__ */ jsxDEV("div", { className: "section-eyebrow", children: "What I Offer" }, void 0, false, {
+          fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+          lineNumber: 10,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("h2", { className: "services-h2", children: [
+          "Services for",
+          /* @__PURE__ */ jsxDEV("br", {}, void 0, false, {
+            fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+            lineNumber: 13,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV("em", { children: "client-ready builds." }, void 0, false, {
+            fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+            lineNumber: 14,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+          lineNumber: 11,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+        lineNumber: 9,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV("div", { className: "services-side", children: /* @__PURE__ */ jsxDEV("p", { className: "services-note", children: "Clear design, clean React code, and practical full-stack features for websites, dashboards, and product interfaces." }, void 0, false, {
+        fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+        lineNumber: 18,
+        columnNumber: 13
+      }, this) }, void 0, false, {
+        fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+        lineNumber: 17,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+      lineNumber: 8,
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ jsxDEV("div", { className: "services-interactive", children: /* @__PURE__ */ jsxDEV("div", { className: "svc-grid", children: services.map(
+      (service) => /* @__PURE__ */ jsxDEV(
+        "a",
+        {
+          className: "svc-card",
+          href: "#contact",
+          children: [
+            /* @__PURE__ */ jsxDEV("div", { className: "svc-card-top", children: [
+              /* @__PURE__ */ jsxDEV("div", { className: "svc-num", children: service.number }, void 0, false, {
+                fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+                lineNumber: 34,
+                columnNumber: 19
+              }, this),
+              /* @__PURE__ */ jsxDEV("span", { className: "svc-icon", children: /* @__PURE__ */ jsxDEV(SiteIcon, { name: service.icon, size: 22 }, void 0, false, {
+                fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+                lineNumber: 36,
+                columnNumber: 21
+              }, this) }, void 0, false, {
+                fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+                lineNumber: 35,
+                columnNumber: 19
+              }, this)
+            ] }, void 0, true, {
+              fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+              lineNumber: 33,
+              columnNumber: 17
+            }, this),
+            /* @__PURE__ */ jsxDEV("h3", { className: "svc-name", children: service.name }, void 0, false, {
+              fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+              lineNumber: 39,
+              columnNumber: 17
+            }, this),
+            /* @__PURE__ */ jsxDEV("p", { className: "svc-desc", children: service.description }, void 0, false, {
+              fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+              lineNumber: 40,
+              columnNumber: 17
+            }, this),
+            /* @__PURE__ */ jsxDEV("div", { className: "svc-blueprint", "aria-hidden": "true", children: [
+              /* @__PURE__ */ jsxDEV("span", {}, void 0, false, {
+                fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+                lineNumber: 42,
+                columnNumber: 19
+              }, this),
+              /* @__PURE__ */ jsxDEV("span", {}, void 0, false, {
+                fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+                lineNumber: 43,
+                columnNumber: 19
+              }, this),
+              /* @__PURE__ */ jsxDEV("span", {}, void 0, false, {
+                fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+                lineNumber: 44,
+                columnNumber: 19
+              }, this)
+            ] }, void 0, true, {
+              fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+              lineNumber: 41,
+              columnNumber: 17
+            }, this),
+            /* @__PURE__ */ jsxDEV("div", { className: "svc-card-foot", children: [
+              /* @__PURE__ */ jsxDEV("span", { className: "svc-outcome", children: service.outcome }, void 0, false, {
+                fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+                lineNumber: 47,
+                columnNumber: 19
+              }, this),
+              /* @__PURE__ */ jsxDEV("span", { className: "svc-price", children: [
+                service.price,
+                " ",
+                /* @__PURE__ */ jsxDEV("small", { children: service.unit }, void 0, false, {
+                  fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+                  lineNumber: 49,
+                  columnNumber: 37
+                }, this)
+              ] }, void 0, true, {
+                fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+                lineNumber: 48,
+                columnNumber: 19
+              }, this)
+            ] }, void 0, true, {
+              fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+              lineNumber: 46,
+              columnNumber: 17
+            }, this)
+          ]
+        },
+        service.name,
+        true,
+        {
+          fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+          lineNumber: 28,
+          columnNumber: 13
+        },
+        this
+      )
+    ) }, void 0, false, {
+      fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+      lineNumber: 26,
+      columnNumber: 11
+    }, this) }, void 0, false, {
+      fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+      lineNumber: 25,
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ jsxDEV("div", { className: "services-mini-cta", children: [
+      /* @__PURE__ */ jsxDEV("span", { children: "Need one of these?" }, void 0, false, {
+        fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+        lineNumber: 58,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV("a", { href: "#contact", children: "Let's talk" }, void 0, false, {
+        fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+        lineNumber: 59,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+      lineNumber: 57,
+      columnNumber: 9
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+    lineNumber: 7,
+    columnNumber: 7
+  }, this) }, void 0, false, {
+    fileName: "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx",
+    lineNumber: 6,
+    columnNumber: 5
+  }, this);
+}
+_c = ServicesSection;
+var _c;
+$RefreshReg$(_c, "ServicesSection");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) {
+  return RefreshRuntime.register(type, "C:/Users/Lenovo/Documents/prajakta_important/My-Portfolio/src/sections/home/ServicesSection.jsx " + id);
+}
+function $RefreshSig$() {
+  return RefreshRuntime.createSignatureFunctionForTransform();
+}
+
+//# sourceMappingURL=data:application/json;base64,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QUFBQTtBQUFBLFdBOEJBO0FBQUEsSUFFQSx1QkFBQyxTQUFJLFdBQVUscUJBQ2I7QUFBQSw2QkFBQyxVQUFLLGtDQUFOO0FBQUE7QUFBQTtBQUFBO0FBQUEsYUFBd0I7QUFBQSxNQUN4Qix1QkFBQyxPQUFFLE1BQUssWUFBVywwQkFBbkI7QUFBQTtBQUFBO0FBQUE7QUFBQSxhQUE2QjtBQUFBLFNBRi9CO0FBQUE7QUFBQTtBQUFBO0FBQUEsV0FHQTtBQUFBLE9BckRGO0FBQUE7QUFBQTtBQUFBO0FBQUEsU0FzREEsS0F2REY7QUFBQTtBQUFBO0FBQUE7QUFBQSxTQXdEQTtBQUVKO0FBQUNLLEtBNUR1QlY7QUFBZSxJQUFBVTtBQUFBLGFBQUFBLElBQUEiLCJuYW1lcyI6WyJTaXRlSWNvbiIsInNlcnZpY2VzIiwiU2VydmljZXNTZWN0aW9uIiwibWFwIiwic2VydmljZSIsIm51bWJlciIsImljb24iLCJuYW1lIiwiZGVzY3JpcHRpb24iLCJvdXRjb21lIiwicHJpY2UiLCJ1bml0IiwiX2MiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiU2VydmljZXNTZWN0aW9uLmpzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgU2l0ZUljb24gZnJvbSBcIi4uLy4uL2NvbXBvbmVudHMvY29tbW9uL1NpdGVJY29uLmpzeFwiO1xuaW1wb3J0IHsgc2VydmljZXMgfSBmcm9tIFwiLi4vLi4vZGF0YS9zZXJ2aWNlcy5qc1wiO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBTZXJ2aWNlc1NlY3Rpb24oKSB7XG4gIHJldHVybiAoXG4gICAgPHNlY3Rpb24gaWQ9XCJzZXJ2aWNlc1wiPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJzZXJ2aWNlcy1pbm5lclwiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNlcnZpY2VzLXRvcFwiPlxuICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNlY3Rpb24tZXllYnJvd1wiPldoYXQgSSBPZmZlcjwvZGl2PlxuICAgICAgICAgICAgPGgyIGNsYXNzTmFtZT1cInNlcnZpY2VzLWgyXCI+XG4gICAgICAgICAgICAgIFNlcnZpY2VzIGZvclxuICAgICAgICAgICAgICA8YnIgLz5cbiAgICAgICAgICAgICAgPGVtPmNsaWVudC1yZWFkeSBidWlsZHMuPC9lbT5cbiAgICAgICAgICAgIDwvaDI+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzZXJ2aWNlcy1zaWRlXCI+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJzZXJ2aWNlcy1ub3RlXCI+XG4gICAgICAgICAgICAgIENsZWFyIGRlc2lnbiwgY2xlYW4gUmVhY3QgY29kZSwgYW5kIHByYWN0aWNhbCBmdWxsLXN0YWNrIGZlYXR1cmVzXG4gICAgICAgICAgICAgIGZvciB3ZWJzaXRlcywgZGFzaGJvYXJkcywgYW5kIHByb2R1Y3QgaW50ZXJmYWNlcy5cbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzZXJ2aWNlcy1pbnRlcmFjdGl2ZVwiPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3ZjLWdyaWRcIj5cbiAgICAgICAgICAgIHtzZXJ2aWNlcy5tYXAoKHNlcnZpY2UpID0+IChcbiAgICAgICAgICAgICAgPGFcbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJzdmMtY2FyZFwiXG4gICAgICAgICAgICAgICAgaHJlZj1cIiNjb250YWN0XCJcbiAgICAgICAgICAgICAgICBrZXk9e3NlcnZpY2UubmFtZX1cbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3ZjLWNhcmQtdG9wXCI+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInN2Yy1udW1cIj57c2VydmljZS5udW1iZXJ9PC9kaXY+XG4gICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJzdmMtaWNvblwiPlxuICAgICAgICAgICAgICAgICAgICA8U2l0ZUljb24gbmFtZT17c2VydmljZS5pY29ufSBzaXplPXsyMn0gLz5cbiAgICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwic3ZjLW5hbWVcIj57c2VydmljZS5uYW1lfTwvaDM+XG4gICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwic3ZjLWRlc2NcIj57c2VydmljZS5kZXNjcmlwdGlvbn08L3A+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzdmMtYmx1ZXByaW50XCIgYXJpYS1oaWRkZW49XCJ0cnVlXCI+XG4gICAgICAgICAgICAgICAgICA8c3BhbiAvPlxuICAgICAgICAgICAgICAgICAgPHNwYW4gLz5cbiAgICAgICAgICAgICAgICAgIDxzcGFuIC8+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzdmMtY2FyZC1mb290XCI+XG4gICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJzdmMtb3V0Y29tZVwiPntzZXJ2aWNlLm91dGNvbWV9PC9zcGFuPlxuICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwic3ZjLXByaWNlXCI+XG4gICAgICAgICAgICAgICAgICAgIHtzZXJ2aWNlLnByaWNlfSA8c21hbGw+e3NlcnZpY2UudW5pdH08L3NtYWxsPlxuICAgICAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2E+XG4gICAgICAgICAgICApKX1cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzZXJ2aWNlcy1taW5pLWN0YVwiPlxuICAgICAgICAgIDxzcGFuPk5lZWQgb25lIG9mIHRoZXNlPzwvc3Bhbj5cbiAgICAgICAgICA8YSBocmVmPVwiI2NvbnRhY3RcIj5MZXQncyB0YWxrPC9hPlxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvZGl2PlxuICAgIDwvc2VjdGlvbj5cbiAgKTtcbn1cbiJdLCJmaWxlIjoiQzovVXNlcnMvTGVub3ZvL0RvY3VtZW50cy9wcmFqYWt0YV9pbXBvcnRhbnQvTXktUG9ydGZvbGlvL3NyYy9zZWN0aW9ucy9ob21lL1NlcnZpY2VzU2VjdGlvbi5qc3gifQ==

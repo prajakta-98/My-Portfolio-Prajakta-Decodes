@@ -26,12 +26,12 @@ export default function WorkCardSwap() {
     <div className="work-card-swap" aria-label="Selected work carousel">
       <CardSwap
         width="min(92%, 580px)"
-        height={380}
-        cardDistance={34}
-        verticalDistance={30}
+        height={360}
+        cardDistance={30}
+        verticalDistance={42}
         delay={5000}
         pauseOnHover
-        skewAmount={4}
+        skewAmount={2}
         easing="elastic"
       >
         {workProjects.map((project) => (
