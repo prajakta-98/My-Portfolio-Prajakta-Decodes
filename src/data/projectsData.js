@@ -88,21 +88,21 @@ const projectsData = {
     image: "/asset/project-flux-payments.svg",
     imageAlt: "Flux Payments fintech dashboard interface preview",
     problem:
-      "Add the verified project problem statement here once this case study is ready.",
+      "Finance teams need dense operational data to stay readable while they review transaction status, exceptions, approvals, and settlement movement.",
     solution:
-      "Add the verified solution summary here, including the product scope and the interface decisions you owned.",
+      "I shaped the interface around clear status hierarchy, scannable dashboard sections, and action-focused workflows so high-volume transaction monitoring feels calmer and easier to review.",
     keyFeatures: [
-      "Add verified feature 1.",
-      "Add verified feature 2.",
-      "Add verified feature 3.",
+      "Dashboard structure for monitoring payment and settlement states.",
+      "Exception-focused interface patterns for faster review.",
+      "Data-heavy UI direction with emphasis on clarity and operational trust.",
     ],
     myContribution: [
-      "Add your verified contribution 1.",
-      "Add your verified contribution 2.",
-      "Add your verified contribution 3.",
+      "Defined the visual hierarchy for complex fintech information.",
+      "Designed dashboard sections that separate status, action, and context.",
+      "Balanced dense data presentation with readable spacing and labels.",
     ],
     outcome:
-      "Add the verified outcome here. Keep it qualitative unless you have real metrics.",
+      "The concept presents complex payment operations in a more structured, review-ready format without relying on unverified metrics.",
   },
   "personal-portfolio-cms": {
     title: "Portfolio CMS | Prajakta Bansod",

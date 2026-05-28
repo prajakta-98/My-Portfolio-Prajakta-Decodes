@@ -179,12 +179,12 @@ export default function ProjectDetailPage() {
             <ProjectLink
               label="Live Demo"
               href={project.links.liveDemo}
-              placeholder="Add the live demo URL in projectsData.js."
+              placeholder="Demo is not publicly available."
             />
             <ProjectLink
               label="GitHub"
               href={project.links.github}
-              placeholder="Add the GitHub repository URL in projectsData.js."
+              placeholder="Repository available on request."
             />
           </div>
         </DetailCard>

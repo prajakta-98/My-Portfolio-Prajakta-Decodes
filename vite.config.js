@@ -18,6 +18,12 @@ export default defineConfig({
         vedicMathGame: resolve(__dirname, "projects/vedic-math-game/index.html"),
         fluxPayments: resolve(__dirname, "projects/flux-payments/index.html"),
       },
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom", "react-router-dom"],
+          animation: ["framer-motion", "gsap", "matter-js", "lenis"],
+        },
+      },
     },
   },
 });

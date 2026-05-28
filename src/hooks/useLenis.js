@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Lenis from "lenis";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
@@ -103,7 +104,7 @@ export default function useLenis(options) {
 
       activeLenis = instance;
       removeScrollListener = instance.on("scroll", () => {
-        window.ScrollTrigger?.update?.();
+        ScrollTrigger.update();
       });
       setLenis(instance);
     };

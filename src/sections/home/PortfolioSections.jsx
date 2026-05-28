@@ -557,12 +557,12 @@ export default function PortfolioSections() {
                 aria-label={
                   physicsActive
                     ? "Reset the intro heading"
-                    : "Drop the intro heading into physics"
+                    : "Click to collect the intro heading animation"
                 }
                 aria-pressed={physicsActive}
                 onClick={collectHeading}
               >
-                <span className="hero-collector-hint">Click</span>
+                <span className="hero-collector-hint">Click to collect</span>
                 <span className="hero-collector-ring"></span>
                 <span className="hero-collector-core"></span>
               </button>

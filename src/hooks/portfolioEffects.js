@@ -1,3 +1,6 @@
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 export function runPortfolioEffects() {
 // NAV SCROLL
       const nav = document.getElementById("nav");

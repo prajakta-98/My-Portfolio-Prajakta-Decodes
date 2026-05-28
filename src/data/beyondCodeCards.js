@@ -40,7 +40,7 @@ const beyondCodeCards = [
     title: "Singing",
     description:
       "I bring rhythm, emotion, and expression into the way I create.",
-    image: "/asset/Singing.png",
+    image: "/asset/Singing.jpg",
     imageAlt: "Portrait of Prajakta Bansod",
     details: ["rhythm", "emotion", "story"],
   },
