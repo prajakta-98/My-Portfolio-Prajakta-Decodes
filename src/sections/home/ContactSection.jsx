@@ -147,7 +147,8 @@ export default function ContactSection() {
               rel="noopener noreferrer"
               className="social-cta-link"
             >
-              GitHub -&gt;
+              <span>GitHub</span>
+              <SiteIcon name="chevronRight" className="button-chevron" size={16} />
             </a>
             <a
               href="https://www.linkedin.com/in/prajakta-bansod/"
@@ -155,7 +156,8 @@ export default function ContactSection() {
               rel="noopener noreferrer"
               className="social-cta-link"
             >
-              LinkedIn -&gt;
+              <span>LinkedIn</span>
+              <SiteIcon name="chevronRight" className="button-chevron" size={16} />
             </a>
             <a
               href="https://www.behance.net/prajaktabansod08"
@@ -163,7 +165,8 @@ export default function ContactSection() {
               rel="noopener noreferrer"
               className="social-cta-link"
             >
-              Behance -&gt;
+              <span>Behance</span>
+              <SiteIcon name="chevronRight" className="button-chevron" size={16} />
             </a>
           </div>
         </div>

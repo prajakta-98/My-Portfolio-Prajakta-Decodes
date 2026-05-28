@@ -102,6 +102,11 @@ const iconPaths = {
       <path d="M7 17l-3 3" />
     </>
   ),
+  chevronRight: (
+    <>
+      <path d="M9 6l6 6-6 6" />
+    </>
+  ),
 };
 
 export default function SiteIcon({ name, className = "", size = 20 }) {

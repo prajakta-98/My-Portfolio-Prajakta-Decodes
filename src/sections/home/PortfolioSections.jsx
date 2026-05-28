@@ -6,6 +6,7 @@ import ContactSection from "./ContactSection.jsx";
 import FinalCtaSection from "./FinalCtaSection.jsx";
 import ServicesSection from "./ServicesSection.jsx";
 import WorkSection from "./WorkSection.jsx";
+import SiteIcon from "../../components/common/SiteIcon.jsx";
 
 const heroParticles = [
   {
@@ -403,7 +404,10 @@ export default function PortfolioSections() {
             <a href="#work">Work</a>
             <a href="#services">Services</a>
             <a href="#contact">Contact</a>
-            <a href="#contact" className="kinetic-mini-cta">Hire me</a>
+            <a href="#contact" className="kinetic-mini-cta">
+              <span>Hire me</span>
+              <SiteIcon name="chevronRight" className="button-chevron" size={16} />
+            </a>
           </div>
 
           <div className="kinetic-pixel-mark" aria-hidden="true">

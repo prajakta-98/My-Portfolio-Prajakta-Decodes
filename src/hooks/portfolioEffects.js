@@ -492,11 +492,20 @@ function dismissLoader() {
   const finish = () => {
     if (finished) return;
     finished = true;
-    window.scrollTo(0, 0);
+    const hashTarget = window.location.hash
+      ? document.querySelector(window.location.hash)
+      : null;
     document.body.classList.remove("is-loading");
     if (loaderEl) {
       loaderEl.classList.add("is-hidden");
       loaderEl.style.display = "none";
+    }
+    if (hashTarget) {
+      window.setTimeout(() => {
+        hashTarget.scrollIntoView({ block: "start" });
+      }, 0);
+    } else {
+      window.scrollTo(0, 0);
     }
     startIntroAnimations();
   };

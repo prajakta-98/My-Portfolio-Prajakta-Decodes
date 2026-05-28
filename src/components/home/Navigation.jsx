@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SiteIcon from "../common/SiteIcon.jsx";
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -53,7 +54,10 @@ export default function Navigation() {
             <li><a href="#services" onClick={closeMenu}>Services</a></li>
             <li><a href="#contact" onClick={closeMenu}>Contact</a></li>
           </ul>
-          <a href="#contact" className="nav-cta" onClick={closeMenu}>Hire Me</a>
+          <a href="#contact" className="nav-cta" onClick={closeMenu}>
+            <span>Hire Me</span>
+            <SiteIcon name="chevronRight" className="button-chevron" size={16} />
+          </a>
         </div>
       </div>
     </nav>

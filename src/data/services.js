@@ -72,30 +72,3 @@ export const services = [
       "Best when you already have a product and need a specific feature designed, built, or improved.",
   },
 ];
-
-export const serviceProcessSteps = [
-  {
-    number: "01",
-    title: "Discovery Call",
-    description:
-      "Free 30-min call to understand your goals, timeline and budget",
-  },
-  {
-    number: "02",
-    title: "Design & Plan",
-    description:
-      "Wireframes, prototypes and a clear project plan before a single line of code",
-  },
-  {
-    number: "03",
-    title: "Build & Review",
-    description:
-      "Regular updates, weekly demos, feedback at every step - no surprises",
-  },
-  {
-    number: "04",
-    title: "Ship & Support",
-    description:
-      "Deployed, QA tested and 2 weeks of free post-launch support included",
-  },
-];

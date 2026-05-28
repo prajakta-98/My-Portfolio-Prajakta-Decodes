@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import SiteIcon from "../../components/common/SiteIcon.jsx";
 import beyondCodeCards from "../../data/beyondCodeCards.js";
 
 const PRINT_INTERVAL_MS = 3350;
 
 const introCopy =
-  "A tiny peek at the tabs running behind the developer mode: light-chasing, kitchen experiments, random singing, and a very serious relationship with little details.";
+  "A small peek at the tabs running behind developer mode: light, process, rhythm, and a serious relationship with tiny details.";
 
 export default function BeyondCodeSection() {
   const [printStep, setPrintStep] = useState(0);
@@ -21,47 +20,28 @@ export default function BeyondCodeSection() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const interestCards = [
+  const interestMoments = [
     {
       kind: "photo",
-      icon: "camera",
       label: "Photography",
-      title: "Light hunter, part-time shadow detective.",
-      caption: "I can turn a five-minute walk into a 42-photo field study.",
+      caption: "light collector",
       image: photography.image,
       imageAlt: photography.imageAlt,
-      stat: "one more angle",
-      details: ["golden hour bias", "tiny frames", "visual notes"],
     },
     {
       kind: "cooking",
-      icon: "chef",
       label: "Cooking",
-      title: "Recipe follower until the plot gets interesting.",
-      caption: "Taste, adjust, pretend it was the plan all along.",
+      caption: "spice QA",
       image: cooking.image,
       imageAlt: cooking.imageAlt,
-      stat: "spice QA",
-      details: ["slow prep", "happy accidents", "plate polish"],
     },
     {
       kind: "singing",
-      icon: "music",
       label: "Singing",
-      title: "Playlist opens. Main character mode loads.",
-      caption: "Not every room asked for a concert. Some received one anyway.",
+      caption: "playlist drama",
       image: singing.image,
       imageAlt: singing.imageAlt,
-      stat: "chorus repeat",
-      details: ["rhythm", "emotion", "dramatic bridge"],
     },
-  ];
-
-  const statusNotes = [
-    "Coffee level: strategically maintained",
-    "Camera roll: emotionally attached",
-    "Kitchen confidence: high, measurements: flexible",
-    "Playlist discipline: unavailable",
   ];
 
   const printedPhotos = [
@@ -89,7 +69,7 @@ export default function BeyondCodeSection() {
       src: "/asset/Flower2.jpg",
       alt: "Close-up of a flower with vibrant colors",
       caption: "flower power, up close",
-    }
+    },
   ];
 
   const pilePositions = [
@@ -123,16 +103,13 @@ export default function BeyondCodeSection() {
           <p className="sr d2">{introCopy}</p>
         </header>
 
-        <div
-          className="personal-lab sr d2"
-          aria-label="Personal interests beyond coding"
-        >
+        <div className="personal-lab sr d2" aria-label="Personal interests beyond coding">
           <div className="personal-stage">
             <div className="personal-stage-copy">
               <span>Offline mode</span>
               <h3>Curious. Human. A little dramatic.</h3>
               <p>
-                Outside code, I collect details, process, rhythm, and stories 
+                Outside code, I collect details, process, rhythm, and stories;
                 the same things I bring into the interfaces I build.
               </p>
             </div>
@@ -176,27 +153,20 @@ export default function BeyondCodeSection() {
                 ))}
               </div>
 
-              <figcaption>
+              {/* <figcaption>
                 printing proof that offline mode is not idle
-              </figcaption>
+              </figcaption> */}
             </figure>
-          </div>
 
-          <div className="interest-grid">
-            {interestCards.map((item) => (
-              <article
-                className={`interest-card is-${item.kind}`}
-                key={item.kind}
-              >
-                <div className="interest-card-top">
-                  <span className="interest-icon">
-                    <SiteIcon name={item.icon} size={18} />
-                  </span>
-                  <span className="interest-label">{item.label}</span>
-                  <span className="interest-stat">{item.stat}</span>
-                </div>
-
-                <div className="interest-card-body">
+            <div
+              className="camera-interest-polaroids"
+              aria-label="Personal interests represented as printed moments"
+            >
+              {interestMoments.map((item) => (
+                <article
+                  className={`camera-interest-polaroid is-${item.kind}`}
+                  key={item.kind}
+                >
                   <img
                     src={item.image}
                     alt={item.imageAlt}
@@ -204,27 +174,12 @@ export default function BeyondCodeSection() {
                     decoding="async"
                   />
                   <div>
+                    <h3>{item.label}</h3>
                     <p>{item.caption}</p>
                   </div>
-                </div>
-
-                <div className="interest-card-copy">
-                  <h3>{item.title}</h3>
-                  <ul aria-label={`${item.label} notes`}>
-                    {item.details.map((detail) => (
-                      <li key={detail}>{detail}</li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="personal-status" aria-label="Tiny personal notes">
-            <span>tiny system logs</span>
-            {statusNotes.map((note) => (
-              <p key={note}>{note}</p>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </div>
