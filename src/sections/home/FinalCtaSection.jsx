@@ -1,5 +1,5 @@
 const trustItems = [
-  ["2+", "Years of experience"],
+  ["1+", "Years of experience"],
   ["4", "Live projects shipped"],
   ["MIT", "Certified UI/UX designer"],
   ["MCA", "Master's in Computer Applications"],

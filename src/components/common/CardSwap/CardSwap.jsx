@@ -1,4 +1,13 @@
-import React, { Children, cloneElement, forwardRef, isValidElement, useEffect, useMemo, useRef } from "react";
+import React, {
+  Children,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from "react";
 import gsap from "gsap";
 import "./CardSwap.css";
 
@@ -27,7 +36,7 @@ const placeNow = (el, slot, skew) =>
     force3D: true,
   });
 
-const CardSwap = ({
+const CardSwap = forwardRef(function CardSwap({
   width = 500,
   height = 400,
   cardDistance = 60,
@@ -38,7 +47,7 @@ const CardSwap = ({
   skewAmount = 6,
   easing = "elastic",
   children,
-}) => {
+}, ref) {
   const config =
     easing === "elastic"
       ? {
@@ -69,32 +78,117 @@ const CardSwap = ({
   const tlRef = useRef(null);
   const intervalRef = useRef();
   const container = useRef(null);
+  const isPausedRef = useRef(false);
+  const controlsRef = useRef({
+    next: () => {},
+    previous: () => {},
+    pause: () => {},
+    play: () => {},
+  });
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      next: () => controlsRef.current.next(),
+      previous: () => controlsRef.current.previous(),
+      pause: () => controlsRef.current.pause(),
+      play: () => controlsRef.current.play(),
+      isPaused: () => isPausedRef.current,
+    }),
+    [],
+  );
 
   useEffect(() => {
     const total = refs.length;
-    refs.forEach((r, i) => placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount));
+    const shouldAnimate =
+      total >= 2 &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+      !window.matchMedia("(max-width: 768px)").matches;
 
-    if (
-      total < 2 ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      window.matchMedia("(max-width: 768px)").matches
-    ) {
-      return () => {
-        clearInterval(intervalRef.current);
-        tlRef.current?.kill();
-      };
-    }
+    const clearAuto = () => {
+      window.clearInterval(intervalRef.current);
+      intervalRef.current = undefined;
+    };
+
+    const startAuto = () => {
+      clearAuto();
+      if (!shouldAnimate || isPausedRef.current) return;
+      intervalRef.current = window.setInterval(() => swap(), delay);
+    };
+
+    const animateToOrder = (nextOrder) => {
+      tlRef.current?.kill();
+      if (!shouldAnimate) {
+        nextOrder.forEach((idx, slotIndex) => {
+          placeNow(
+            refs[idx].current,
+            makeSlot(slotIndex, cardDistance, verticalDistance, total),
+            skewAmount,
+          );
+        });
+        order.current = nextOrder;
+        return;
+      }
+
+      const tl = gsap.timeline();
+      tlRef.current = tl;
+      nextOrder.forEach((idx, slotIndex) => {
+        const slot = makeSlot(slotIndex, cardDistance, verticalDistance, total);
+        tl.set(refs[idx].current, { zIndex: slot.zIndex }, 0);
+        tl.to(
+          refs[idx].current,
+          {
+            x: slot.x,
+            y: slot.y,
+            z: slot.z,
+            duration: 0.42,
+            ease: "power3.out",
+          },
+          0,
+        );
+      });
+      tl.call(() => {
+        order.current = nextOrder;
+      });
+    };
+
+    const previous = () => {
+      if (order.current.length < 2) return;
+      clearAuto();
+      const nextOrder = [
+        order.current[order.current.length - 1],
+        ...order.current.slice(0, -1),
+      ];
+      animateToOrder(nextOrder);
+      startAuto();
+    };
+
+    const pause = () => {
+      isPausedRef.current = true;
+      tlRef.current?.pause();
+      clearAuto();
+    };
+
+    const play = () => {
+      isPausedRef.current = false;
+      tlRef.current?.play();
+      startAuto();
+    };
 
     const swap = () => {
       if (order.current.length < 2) return;
 
       const [front, ...rest] = order.current;
       const elFront = refs[front].current;
+      const dropDistance = Math.min(
+        190,
+        Math.max(150, elFront.offsetHeight * 0.48),
+      );
       const tl = gsap.timeline();
       tlRef.current = tl;
 
       tl.to(elFront, {
-        y: "+=420",
+        y: `+=${dropDistance}`,
         duration: config.durDrop,
         ease: config.ease,
       });
@@ -143,31 +237,52 @@ const CardSwap = ({
       });
     };
 
+    const next = () => {
+      clearAuto();
+      swap();
+      startAuto();
+    };
+
+    controlsRef.current = { next, previous, pause, play };
+    refs.forEach((r, i) => placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount));
+
+    if (!shouldAnimate) {
+      return () => {
+        clearAuto();
+        tlRef.current?.kill();
+      };
+    }
+
     swap();
-    intervalRef.current = window.setInterval(swap, delay);
+    startAuto();
 
     if (pauseOnHover) {
       const node = container.current;
-      const pause = () => {
+      const hoverPause = () => {
         tlRef.current?.pause();
-        clearInterval(intervalRef.current);
+        clearAuto();
       };
-      const resume = () => {
+      const hoverResume = () => {
+        if (isPausedRef.current) return;
         tlRef.current?.play();
-        intervalRef.current = window.setInterval(swap, delay);
+        startAuto();
       };
-      node.addEventListener("mouseenter", pause);
-      node.addEventListener("mouseleave", resume);
+      node.addEventListener("mouseenter", hoverPause);
+      node.addEventListener("focusin", hoverPause);
+      node.addEventListener("mouseleave", hoverResume);
+      node.addEventListener("focusout", hoverResume);
       return () => {
-        node.removeEventListener("mouseenter", pause);
-        node.removeEventListener("mouseleave", resume);
-        clearInterval(intervalRef.current);
+        node.removeEventListener("mouseenter", hoverPause);
+        node.removeEventListener("focusin", hoverPause);
+        node.removeEventListener("mouseleave", hoverResume);
+        node.removeEventListener("focusout", hoverResume);
+        clearAuto();
         tlRef.current?.kill();
       };
     }
 
     return () => {
-      clearInterval(intervalRef.current);
+      clearAuto();
       tlRef.current?.kill();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -192,6 +307,6 @@ const CardSwap = ({
       {rendered}
     </div>
   );
-};
+});
 
 export default CardSwap;

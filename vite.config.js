@@ -1,22 +1,25 @@
 import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+
+const projectRoot = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
       input: {
-        index: resolve(__dirname, "index.html"),
-        portfolio: resolve(__dirname, "prajakta_beyond.html"),
-        project1: resolve(__dirname, "project1.html"),
-        project2: resolve(__dirname, "project2.html"),
-        project3: resolve(__dirname, "project3.html"),
-        personalPortfolioCms: resolve(__dirname, "projects/personal-portfolio-cms/index.html"),
-        tyreJunction: resolve(__dirname, "projects/tyre-junction/index.html"),
-        docupitchAi: resolve(__dirname, "projects/docupitch-ai/index.html"),
-        vedicMathGame: resolve(__dirname, "projects/vedic-math-game/index.html"),
-        fluxPayments: resolve(__dirname, "projects/flux-payments/index.html"),
+        index: resolve(projectRoot, "index.html"),
+        portfolio: resolve(projectRoot, "prajakta_beyond.html"),
+        project1: resolve(projectRoot, "project1.html"),
+        project2: resolve(projectRoot, "project2.html"),
+        project3: resolve(projectRoot, "project3.html"),
+        personalPortfolioCms: resolve(projectRoot, "projects/personal-portfolio-cms/index.html"),
+        tyreJunction: resolve(projectRoot, "projects/tyre-junction/index.html"),
+        docupitchAi: resolve(projectRoot, "projects/docupitch-ai/index.html"),
+        vedicMathGame: resolve(projectRoot, "projects/vedic-math-game/index.html"),
+        fluxPayments: resolve(projectRoot, "projects/flux-payments/index.html"),
       },
       output: {
         manualChunks: {

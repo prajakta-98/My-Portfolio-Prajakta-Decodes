@@ -107,6 +107,22 @@ const iconPaths = {
       <path d="M9 6l6 6-6 6" />
     </>
   ),
+  chevronLeft: (
+    <>
+      <path d="M15 6l-6 6 6 6" />
+    </>
+  ),
+  pause: (
+    <>
+      <path d="M8 5v14" />
+      <path d="M16 5v14" />
+    </>
+  ),
+  play: (
+    <>
+      <path d="M8 5l11 7-11 7z" />
+    </>
+  ),
 };
 
 export default function SiteIcon({ name, className = "", size = 20 }) {

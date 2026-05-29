@@ -97,15 +97,16 @@ export default function ContactSection() {
             <div className="contact-info-row">
               <span className="cir-label">Email</span>
               <span className="cir-val">
-                <a href="mailto:prajakta.bansod@gmail.com">
-                  prajakta.bansod@gmail.com
+                <a href="mailto:prajaktab777@gmail.com">
+                  prajaktab777@gmail.com
                 </a>
               </span>
             </div>
             <div className="contact-info-row">
               <span className="cir-label">Location</span>
               <span className="cir-val contact-icon-text">
-                Pune, India | Remote Worldwide <SiteIcon name="globe" size={15} />
+                Pune, India | Remote Worldwide{" "}
+                <SiteIcon name="globe" size={15} />
               </span>
             </div>
             <div className="contact-info-row">
@@ -130,14 +131,6 @@ export default function ContactSection() {
                 </span>
               </span>
             </div>
-            <div className="contact-info-row">
-              <span className="cir-label">LinkedIn</span>
-              <span className="cir-val">
-                <a href="https://www.linkedin.com/in/prajakta-bansod/">
-                  linkedin.com/in/prajakta-bansod
-                </a>
-              </span>
-            </div>
           </div>
 
           <div className="social-cta-row">
@@ -148,7 +141,11 @@ export default function ContactSection() {
               className="social-cta-link"
             >
               <span>GitHub</span>
-              <SiteIcon name="chevronRight" className="button-chevron" size={16} />
+              <SiteIcon
+                name="chevronRight"
+                className="button-chevron"
+                size={16}
+              />
             </a>
             <a
               href="https://www.linkedin.com/in/prajakta-bansod/"
@@ -157,7 +154,11 @@ export default function ContactSection() {
               className="social-cta-link"
             >
               <span>LinkedIn</span>
-              <SiteIcon name="chevronRight" className="button-chevron" size={16} />
+              <SiteIcon
+                name="chevronRight"
+                className="button-chevron"
+                size={16}
+              />
             </a>
             <a
               href="https://www.behance.net/prajaktabansod08"
@@ -166,7 +167,11 @@ export default function ContactSection() {
               className="social-cta-link"
             >
               <span>Behance</span>
-              <SiteIcon name="chevronRight" className="button-chevron" size={16} />
+              <SiteIcon
+                name="chevronRight"
+                className="button-chevron"
+                size={16}
+              />
             </a>
           </div>
         </div>
@@ -194,7 +199,11 @@ export default function ContactSection() {
             <div className="form-paper-title">
               <SiteIcon name="mail" size={18} /> Send me a note
             </div>
-            <form id="contact-form" data-recipient="prajaktab777@gmail.com" noValidate>
+            <form
+              id="contact-form"
+              data-recipient="prajaktab777@gmail.com"
+              noValidate
+            >
               <input
                 type="hidden"
                 name="_subject"
@@ -224,7 +233,11 @@ export default function ContactSection() {
                     autoComplete="name"
                     aria-describedby="cf-name-error"
                   />
-                  <div className="f-error" id="cf-name-error" aria-live="polite"></div>
+                  <div
+                    className="f-error"
+                    id="cf-name-error"
+                    aria-live="polite"
+                  ></div>
                 </div>
                 <div className="f-group">
                   <label className="f-label" htmlFor="cf-email">
@@ -240,7 +253,11 @@ export default function ContactSection() {
                     autoComplete="email"
                     aria-describedby="cf-email-error"
                   />
-                  <div className="f-error" id="cf-email-error" aria-live="polite"></div>
+                  <div
+                    className="f-error"
+                    id="cf-email-error"
+                    aria-live="polite"
+                  ></div>
                 </div>
               </div>
               <div className="f-group">
@@ -267,7 +284,11 @@ export default function ContactSection() {
                     </option>
                   ))}
                 </select>
-                <div className="f-error" id="cf-service-error" aria-live="polite"></div>
+                <div
+                  className="f-error"
+                  id="cf-service-error"
+                  aria-live="polite"
+                ></div>
               </div>
               <fieldset className="f-group budget-fieldset">
                 <legend className="f-label">Approximate budget? *</legend>
@@ -280,11 +301,21 @@ export default function ContactSection() {
                 >
                   {budgetOptions.map((option) => (
                     <label className="budget-opt" key={option}>
-                      <input type="radio" name="budget" value={option} required /> {option}
+                      <input
+                        type="radio"
+                        name="budget"
+                        value={option}
+                        required
+                      />{" "}
+                      {option}
                     </label>
                   ))}
                 </div>
-                <div className="f-error" id="cf-budget-error" aria-live="polite"></div>
+                <div
+                  className="f-error"
+                  id="cf-budget-error"
+                  aria-live="polite"
+                ></div>
               </fieldset>
               <div className="f-group">
                 <label className="f-label" htmlFor="cf-msg">
@@ -298,7 +329,11 @@ export default function ContactSection() {
                   placeholder="What are you building? What's the timeline?"
                   aria-describedby="cf-msg-error"
                 ></textarea>
-                <div className="f-error" id="cf-msg-error" aria-live="polite"></div>
+                <div
+                  className="f-error"
+                  id="cf-msg-error"
+                  aria-live="polite"
+                ></div>
               </div>
               <div
                 className="form-status"
@@ -343,7 +378,7 @@ export default function ContactSection() {
               transform: "rotate(-1deg)",
             }}
           >
-            promise I read every single one
+            promise I read every single one ✨
           </div>
         </div>
       </div>

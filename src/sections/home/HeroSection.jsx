@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Matter from "matter-js";
-import BeyondCodeSection from "./BeyondCodeSection.jsx";
-import ContactSection from "./ContactSection.jsx";
-import FinalCtaSection from "./FinalCtaSection.jsx";
-import ServicesSection from "./ServicesSection.jsx";
-import WorkSection from "./WorkSection.jsx";
 import SiteIcon from "../../components/common/SiteIcon.jsx";
 
 const heroParticles = [
@@ -70,7 +65,7 @@ const pixelBlocks = [
 ];
 
 const heroHeadline =
-  "A full-stack UI developer crafting playful interfaces based in Pune, India.";
+  "A full-stack UI developer who owns the product from first pixel to final deployment.";
 
 const heroPopupImages = [
   "/asset/Sticker3.png",
@@ -84,6 +79,21 @@ const heroPopupImages = [
 const heroWords = heroHeadline.split(" ").map((text, index) => ({
   text,
   image: heroPopupImages[index % heroPopupImages.length],
+}));
+
+const titleLetters = [];
+const heroWordsWithLetters = heroWords.map((word, wordIndex) => ({
+  ...word,
+  letters: Array.from(word.text).map((char, letterIndex) => {
+    const titleIndex = titleLetters.length;
+    titleLetters.push({
+      char,
+      wordIndex,
+      letterIndex,
+      id: `${wordIndex}-${letterIndex}`,
+    });
+    return { char, letterIndex, titleIndex };
+  }),
 }));
 
 const pixelHeartCells = [
@@ -123,15 +133,6 @@ const pixelHeartCells = [
     [9, 3],
   ].map(([x, y]) => ({ x, y, tone: "shine" })),
 ];
-
-const titleLetters = heroWords.flatMap((word, wordIndex) =>
-  Array.from(word.text).map((char, letterIndex) => ({
-    char,
-    wordIndex,
-    letterIndex,
-    id: `${wordIndex}-${letterIndex}`,
-  })),
-);
 
 const heartPixels = [
   [1, 0],
@@ -175,23 +176,12 @@ const HERO_PHYSICS_EXPAND_MS = 700;
 const HERO_PHYSICS_RELEASE_MS = 900;
 const HERO_PHYSICS_STEP = 1000 / 60;
 
+// Uses Matter.js only while the heading is collected, then tears it down on reset.
 function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
   useEffect(() => {
     if (!isActive || !stageRef.current) return undefined;
 
     const stage = stageRef.current;
-    const offsetParent =
-      stage.offsetParent instanceof HTMLElement
-        ? stage.offsetParent
-        : stage.parentElement;
-    const parentRect = offsetParent?.getBoundingClientRect() ?? {
-      left: 0,
-      top: 0,
-    };
-    const stageRect = {
-      left: parentRect.left + stage.offsetLeft,
-      top: parentRect.top + stage.offsetTop,
-    };
     const width = Math.max(280, stage.offsetWidth);
     const height = Math.max(280, stage.offsetHeight);
     const radius = Math.min(width, height) * 0.475;
@@ -332,7 +322,7 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
   }, [isActive, letterRefs, setBodies, stageRef]);
 }
 
-export default function PortfolioSections() {
+export default function HeroSection() {
   const [physicsMode, setPhysicsMode] = useState("idle");
   const [physicsBodies, setPhysicsBodies] = useState([]);
   const physicsStageRef = useRef(null);
@@ -383,229 +373,206 @@ export default function PortfolioSections() {
   };
 
   return (
-    <>
-      <section id="beyond">
-        <div className="beyond-grain"></div>
+    <motion.section
+      id="home-hero"
+      className="kinetic-hero"
+      aria-labelledby="kinetic-hero-title"
+      initial={{ opacity: 0.96 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+    >
+      <div className="hero-topbar">
+        <div className="kinetic-brand">
+          <span>Prajakta-Decodes</span>
+          <span>Pune, India</span>
+        </div>
 
-        <motion.div
-          className="kinetic-hero"
-          aria-labelledby="kinetic-hero-title"
-          initial={{ opacity: 0.96 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-        >
-          <div className="kinetic-brand hero-edge">
-            <span>Prajakta-Decodes</span>
-            <span>Pune, India</span>
-          </div>
+        <div className="kinetic-pixel-mark" aria-hidden="true">
+          {pixelHeartCells.map((cell, index) => (
+            <span
+              className={`kinetic-heart-pixel is-${cell.tone}`}
+              key={`${cell.tone}-${cell.x}-${cell.y}-${index}`}
+              style={{
+                "--heart-x": cell.x,
+                "--heart-y": cell.y,
+              }}
+            ></span>
+          ))}
+        </div>
 
-          <div className="kinetic-mini-nav hero-edge" aria-label="Primary navigation">
-            <a href="#beyond">Get to know me</a>
-            <a href="#work">Work</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-            <a href="#contact" className="kinetic-mini-cta">
-              <span>Hire me</span>
-              <SiteIcon name="chevronRight" className="button-chevron" size={16} />
-            </a>
-          </div>
+        <div className="kinetic-mini-nav" aria-label="Primary navigation">
+          <a href="#beyond-code">Get to know me</a>
+          <a href="#work">Work</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+          <a href="#contact" className="kinetic-mini-cta">
+            <span>Hire me</span>
+            <SiteIcon
+              name="chevronRight"
+              className="button-chevron"
+              size={16}
+            />
+          </a>
+        </div>
+      </div>
 
-          <div className="kinetic-pixel-mark" aria-hidden="true">
-            {pixelHeartCells.map((cell, index) => (
-              <span
-                className={`kinetic-heart-pixel is-${cell.tone}`}
-                key={`${cell.tone}-${cell.x}-${cell.y}-${index}`}
-                style={{
-                  "--heart-x": cell.x,
-                  "--heart-y": cell.y,
-                }}
-              ></span>
-            ))}
-          </div>
-
-          <div className="kinetic-particle-field">
-            {heroParticles.map((particle, index) => (
-              <button
-                type="button"
-                className="kinetic-particle"
-                key={index}
-                aria-label={particle.label}
-                style={{
-                  "--particle-x": particle.x,
-                  "--particle-y": particle.y,
-                  "--particle-color": particle.c,
-                  "--sticker-rotate": particle.rotate,
-                }}
-              >
-                <span className="kinetic-particle-dot"></span>
-                <span className="kinetic-sticker-preview" aria-hidden="true">
-                  <img src={particle.sticker} alt="" />
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div className="hero-pixel-cloud" aria-hidden="true">
-            {pixelBlocks.map((block, index) => (
-              <span
-                className="kinetic-pixel"
-                key={index}
-                style={{ "--px": block.x, "--py": block.y }}
-              ></span>
-            ))}
-          </div>
-          <div
-            className={`kinetic-hero-copy is-physics-${physicsMode}`}
+      <div className="kinetic-particle-field">
+        {heroParticles.map((particle, index) => (
+          <button
+            type="button"
+            className="kinetic-particle"
+            key={index}
+            aria-label={particle.label}
+            style={{
+              "--particle-x": particle.x,
+              "--particle-y": particle.y,
+              "--particle-color": particle.c,
+              "--sticker-rotate": particle.rotate,
+            }}
           >
-            <p className="kinetic-kicker kinetic-reveal">
-              Full-Stack UI Developer
-            </p>
-            <div className="kinetic-heading-stage">
-              <div className="hero-pixel-loader" aria-hidden="true">
-                {revealPixels.map((pixel, index) => (
+            <span className="kinetic-particle-dot"></span>
+            <span className="kinetic-sticker-preview" aria-hidden="true">
+              <img src={particle.sticker} alt="" />
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <div className="hero-pixel-cloud" aria-hidden="true">
+        {pixelBlocks.map((block, index) => (
+          <span
+            className="kinetic-pixel"
+            key={index}
+            style={{ "--px": block.x, "--py": block.y }}
+          ></span>
+        ))}
+      </div>
+      <div className={`kinetic-hero-copy is-physics-${physicsMode}`}>
+        <p className="kinetic-kicker kinetic-reveal">Full-Stack UI Developer</p>
+        <div className="kinetic-heading-stage">
+          <div className="hero-pixel-loader" aria-hidden="true">
+            {revealPixels.map((pixel, index) => (
+              <span
+                key={index}
+                style={{
+                  "--pixel-end-x": pixel.x,
+                  "--pixel-end-y": pixel.y,
+                  "--pixel-delay": pixel.delay,
+                }}
+              ></span>
+            ))}
+          </div>
+          <div className="hero-physics-world" ref={physicsStageRef}>
+            {physicsBodies.map((body) => (
+              <span
+                className="hero-physics-letter"
+                key={body.id}
+                style={{
+                  transform: `translate3d(${body.x}px, ${body.y}px, 0) translate(-50%, -50%) rotate(${body.angle}rad)`,
+                }}
+              >
+                {body.char}
+              </span>
+            ))}
+            <button
+              type="button"
+              className="hero-release"
+              aria-label="Restore heading"
+              onClick={releaseHeading}
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 17L17 7" />
+                <path d="M9 7h8v8" />
+              </svg>
+            </button>
+          </div>
+          <h1
+            id="kinetic-hero-title"
+            className="kinetic-title"
+            aria-hidden={physicsActive}
+          >
+            {heroWordsWithLetters.map((word) => (
+              <span
+                className="hero-title-word"
+                key={word.text}
+                tabIndex={physicsActive ? -1 : 0}
+              >
+                {word.letters.map((letter) => (
                   <span
-                    key={index}
-                    style={{
-                      "--pixel-end-x": pixel.x,
-                      "--pixel-end-y": pixel.y,
-                      "--pixel-delay": pixel.delay,
-                    }}
-                  ></span>
-                ))}
-              </div>
-              <div className="hero-physics-world" ref={physicsStageRef}>
-                {physicsBodies.map((body) => (
-                  <span
-                    className="hero-physics-letter"
-                    key={body.id}
-                    style={{
-                      transform: `translate3d(${body.x}px, ${body.y}px, 0) translate(-50%, -50%) rotate(${body.angle}rad)`,
+                    className="hero-title-letter"
+                    key={`${word.text}-${letter.letterIndex}`}
+                    ref={(node) => {
+                      letterRefs.current[letter.titleIndex] = node;
                     }}
                   >
-                    {body.char}
+                    {letter.char}
                   </span>
                 ))}
-                <button
-                  type="button"
-                  className="hero-release"
-                  aria-label="Restore heading"
-                  onClick={releaseHeading}
-                >
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M7 17L17 7" />
-                    <path d="M9 7h8v8" />
-                  </svg>
-                </button>
-              </div>
-              <h1
-                id="kinetic-hero-title"
-                className="kinetic-title"
-                aria-hidden={physicsActive}
-              >
-                {heroWords.map((word, wordIndex) => (
-                  <span
-                    className="hero-title-word"
-                    key={word.text}
-                    tabIndex={physicsActive ? -1 : 0}
-                  >
-                    {Array.from(word.text).map((char, letterIndex) => {
-                      const letterPosition = titleLetters.findIndex(
-                        (letter) =>
-                          letter.wordIndex === wordIndex &&
-                          letter.letterIndex === letterIndex,
-                      );
-                      return (
-                        <span
-                          className="hero-title-letter"
-                          key={`${word.text}-${letterIndex}`}
-                          ref={(node) => {
-                            letterRefs.current[letterPosition] = node;
-                          }}
-                        >
-                          {char}
-                        </span>
-                      );
-                    })}
-                    <span className="hero-word-popup" aria-hidden="true">
-                      <img src={word.image} alt="" />
-                    </span>
-                  </span>
-                ))}
-              </h1>
-              <p className="kinetic-subcopy kinetic-reveal">
-                Building fast React experiences with careful interaction design
-                and practical full-stack delivery.
-              </p>
-              {/* <div className="kinetic-tech-stack kinetic-reveal" aria-label="Core skills">
-                <span>React</span>
-                <span>MERN</span>
-                <span>UI/UX</span>
-                <span>Dashboards</span>
-                <span>Landing Pages</span>
-              </div> */}
-              <button
-                type="button"
-                className="hero-collector"
-                aria-label={
-                  physicsActive
-                    ? "Reset the intro heading"
-                    : "Click to collect the intro heading animation"
-                }
-                aria-pressed={physicsActive}
-                onClick={collectHeading}
-              >
-                <span className="hero-collector-hint">Click to collect</span>
-                <span className="hero-collector-ring"></span>
-                <span className="hero-collector-core"></span>
-              </button>
-            </div>
-            <div className="kinetic-actions kinetic-reveal">
-              <motion.a
-                href="#work"
-                className="kinetic-action-primary"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                View Projects
-              </motion.a>
-              <motion.a
-                href="https://drive.google.com/file/d/13RQkO5hJcCe2cM1Dp0rHXczJkI5oEKQb/view?usp=drive_link"
-                className="kinetic-action-secondary"
-                target="_blank"
-                rel="noreferrer"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Download Resume
-              </motion.a>
-            </div>
-          </div>
+                <span className="hero-word-popup" aria-hidden="true">
+                  <img src={word.image} alt="" />
+                </span>
+              </span>
+            ))}
+          </h1>
+          <p className="kinetic-subcopy kinetic-reveal">
+            I write clean code, sweat the details, and ship things people
+            actually enjoy using.
+          </p>
+          <button
+            type="button"
+            className="hero-collector"
+            aria-label={
+              physicsActive
+                ? "Reset the intro heading"
+                : "Click to collect the intro heading animation"
+            }
+            aria-pressed={physicsActive}
+            onClick={collectHeading}
+          >
+            <span className="hero-collector-hint">Click to collect</span>
+            <span className="hero-collector-ring"></span>
+            <span className="hero-collector-core"></span>
+          </button>
+        </div>
+        <div className="kinetic-actions kinetic-reveal">
+          <motion.a
+            href="#work"
+            className="kinetic-action-primary"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            View Projects
+          </motion.a>
+          <motion.a
+            href="https://drive.google.com/file/d/13RQkO5hJcCe2cM1Dp0rHXczJkI5oEKQb/view?usp=drive_link"
+            className="kinetic-action-secondary"
+            target="_blank"
+            rel="noreferrer"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Download Resume
+          </motion.a>
+        </div>
+      </div>
 
-          <div className="kinetic-bottom hero-edge">
-            <span>React</span>
-            <span>MERN</span>
-            <span>Dashboards</span>
-            <span>UI/UX</span>
-            <span>Landing Pages</span>
-          </div>
+      <div className="kinetic-bottom hero-edge">
+        <span>React</span>
+        <span>MERN</span>
+        <span>Dashboards</span>
+        <span>UI/UX</span>
+        <span>Landing Pages</span>
+      </div>
 
-          <div className="kinetic-year hero-edge">2026</div>
-        </motion.div>
-
-        <WorkSection />
-        <ServicesSection />
-        <BeyondCodeSection />
-        <ContactSection />
-        <FinalCtaSection />
-      </section>
-    </>
+      <div className="kinetic-year hero-edge">2026</div>
+    </motion.section>
   );
 }

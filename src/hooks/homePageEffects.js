@@ -1,102 +1,84 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export function runPortfolioEffects() {
-// NAV SCROLL
-      const nav = document.getElementById("nav");
-      if (nav) {
-        window.addEventListener("scroll", () =>
-          nav.classList.toggle("scrolled", scrollY > 50),
-        );
+export function runHomePageEffects() {
+  const nav = document.getElementById("nav");
+  if (nav) {
+    window.addEventListener("scroll", () =>
+      nav.classList.toggle("scrolled", window.scrollY > 50),
+    );
+  }
+
+  initCustomCursor();
+
+  // Decorative stickers stay outside React state because dragging only changes position.
+  ["fstk1", "fstk2", "fstk3"].forEach((id) => {
+    const sticker = document.getElementById(id);
+    if (!sticker) return;
+
+    let activePointerId = null;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    sticker.addEventListener("pointerdown", (e) => {
+      if (e.button !== undefined && e.button !== 0) return;
+
+      const parentRect = sticker.parentElement.getBoundingClientRect();
+      const rect = sticker.getBoundingClientRect();
+      const currentLeft = rect.left - parentRect.left;
+      const currentTop = rect.top - parentRect.top;
+
+      sticker.style.left = `${currentLeft}px`;
+      sticker.style.top = `${currentTop}px`;
+      sticker.style.right = "auto";
+      sticker.style.bottom = "auto";
+      sticker.style.transition = "none";
+      sticker.style.zIndex = "50";
+      sticker.classList.add("dragging");
+
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+      activePointerId = e.pointerId;
+      sticker.setPointerCapture(activePointerId);
+      e.preventDefault();
+    });
+
+    sticker.addEventListener("pointermove", (e) => {
+      if (activePointerId !== e.pointerId) return;
+
+      const parentRect = sticker.parentElement.getBoundingClientRect();
+      const maxLeft = Math.max(0, parentRect.width - sticker.offsetWidth);
+      const maxTop = Math.max(0, parentRect.height - sticker.offsetHeight);
+      const nextLeft = clamp(e.clientX - parentRect.left - offsetX, 0, maxLeft);
+      const nextTop = clamp(e.clientY - parentRect.top - offsetY, 0, maxTop);
+
+      sticker.style.left = `${nextLeft}px`;
+      sticker.style.top = `${nextTop}px`;
+    });
+
+    const stopDragging = (e) => {
+      if (activePointerId !== e.pointerId) return;
+
+      activePointerId = null;
+      sticker.classList.remove("dragging");
+      sticker.style.zIndex = "10";
+      sticker.style.transition = "";
+
+      if (sticker.hasPointerCapture(e.pointerId)) {
+        sticker.releasePointerCapture(e.pointerId);
       }
+    };
 
-      // CURSOR
-      initCustomCursor();
-
-      // WAVEFORM BARS
-      (function () {
-        const wf = document.getElementById("waveform");
-        if (!wf) return;
-        const count = 32;
-        for (let i = 0; i < count; i++) {
-          const h = Math.round(8 + Math.random() * 42);
-          const spd = (0.6 + Math.random() * 1.2).toFixed(2);
-          const dl = (Math.random() * 1).toFixed(2);
-          const b = document.createElement("div");
-          b.className = "wv-bar";
-          b.style.cssText = `--h:${h}px;height:${h}px;--spd:${spd}s;--dl:${dl}s;animation-direction:${i % 2 === 0 ? "alternate" : "alternate-reverse"}`;
-          wf.appendChild(b);
-        }
-      })();
-       
-// DRAGGABLE STICKERS
-["fstk1", "fstk2", "fstk3"].forEach((id) => {
-  const sticker = document.getElementById(id);
-  if (!sticker) return;
-
-  let activePointerId = null;
-  let offsetX = 0;
-  let offsetY = 0;
-
-  sticker.addEventListener("pointerdown", (e) => {
-    if (e.button !== undefined && e.button !== 0) return;
-
-    const parentRect = sticker.parentElement.getBoundingClientRect();
-    const rect = sticker.getBoundingClientRect();
-    const currentLeft = rect.left - parentRect.left;
-    const currentTop = rect.top - parentRect.top;
-
-    sticker.style.left = `${currentLeft}px`;
-    sticker.style.top = `${currentTop}px`;
-    sticker.style.right = "auto";
-    sticker.style.bottom = "auto";
-    sticker.style.transition = "none";
-    sticker.style.zIndex = "50";
-    sticker.classList.add("dragging");
-
-    offsetX = e.clientX - rect.left;
-    offsetY = e.clientY - rect.top;
-    activePointerId = e.pointerId;
-    sticker.setPointerCapture(activePointerId);
-    e.preventDefault();
+    sticker.addEventListener("pointerup", stopDragging);
+    sticker.addEventListener("pointercancel", stopDragging);
   });
-
-  sticker.addEventListener("pointermove", (e) => {
-    if (activePointerId !== e.pointerId) return;
-
-    const parentRect = sticker.parentElement.getBoundingClientRect();
-    const maxLeft = Math.max(0, parentRect.width - sticker.offsetWidth);
-    const maxTop = Math.max(0, parentRect.height - sticker.offsetHeight);
-    const nextLeft = clamp(e.clientX - parentRect.left - offsetX, 0, maxLeft);
-    const nextTop = clamp(e.clientY - parentRect.top - offsetY, 0, maxTop);
-
-    sticker.style.left = `${nextLeft}px`;
-    sticker.style.top = `${nextTop}px`;
-  });
-
-  const stopDragging = (e) => {
-    if (activePointerId !== e.pointerId) return;
-
-    activePointerId = null;
-    sticker.classList.remove("dragging");
-    sticker.style.zIndex = "10";
-    sticker.style.transition = "";
-
-    if (sticker.hasPointerCapture(e.pointerId)) {
-      sticker.releasePointerCapture(e.pointerId);
-    }
-  };
-
-  sticker.addEventListener("pointerup", stopDragging);
-  sticker.addEventListener("pointercancel", stopDragging);
-});
- 
-// FORM
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const loaderStart = performance.now();
-const loaderEl = document.getElementById("site-loader");
-let introStarted = false;
-let loaderDismissed = false;
+  
+  // FormSubmit integration with client-side validation before the network call.
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const loaderStart = performance.now();
+  const loaderEl = document.getElementById("site-loader");
+  let introStarted = false;
+  let loaderDismissed = false;
 
 function initCustomCursor() {
   const cur = document.getElementById("cur");
@@ -174,13 +156,6 @@ function clamp(value, min, max) {
 
 function revealWithoutGsap() {
   revealKineticHeroWithoutGsap();
-  document.querySelectorAll(".w-inner").forEach((el) => {
-    el.style.transform = "translateY(0)";
-  });
-  document.querySelectorAll(".intro-eyebrow,.intro-sub,.name-doodle").forEach((el) => {
-    el.style.opacity = "1";
-    el.style.transform = "translate(0,0)";
-  });
   document.querySelectorAll(".sr,.sr-l,.sr-r,.sr-s,.reveal,.reveal-scale,.passion-label,.passion-h2").forEach((el) => {
     el.classList.add("vis");
     el.style.opacity = "1";
@@ -338,14 +313,6 @@ function initKineticHero(heroDelay) {
     stagger: { each: 0.05, from: "center", repeat: -1, yoyo: true },
     ease: "sine.inOut",
   });
-
-  gsap.to(".kinetic-frame", {
-    opacity: 0.58,
-    duration: 1.8,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut",
-  });
 }
 
 function startIntroAnimations() {
@@ -396,8 +363,7 @@ function startIntroAnimations() {
     const base = ["-8deg", "5deg", "2deg", "-6deg"][i] || "0deg";
     pol.addEventListener("mousemove", (e) => {
       const r = pol.getBoundingClientRect();
-      const cx = r.left + r.width / 2,
-        cy = r.top + r.height / 2;
+      const cx = r.left + r.width / 2;
       const dx = ((e.clientX - cx) / r.width) * 12;
       pol.style.transform = `rotate(${dx}deg) translateY(-8px) scale(1.04)`;
     });
@@ -407,84 +373,7 @@ function startIntroAnimations() {
     });
   });
 
-  startHelloCycler();
   initFooterPillDrop();
-}
-
-function startHelloCycler() {
-  const helloCycler = document.querySelector(".hello-cycler");
-  if (!helloCycler) return;
-
-  // Collect words - use Array.from so multi-byte unicode chars count as 1
-  const words = Array.from(helloCycler.querySelectorAll(".hello-word")).map((el) => ({
-    chars: Array.from(el.textContent.trim()),
-    lang:  el.dataset.lang || "",
-  }));
-  if (!words.length) return;
-
-  const helloLangLabel = document.querySelector(".hello-lang-label");
-
-  // Swap inner content for a single typewriter span
-  helloCycler.innerHTML = "";
-  const display = document.createElement("span");
-  display.className = "hello-typewriter";
-  helloCycler.appendChild(display);
-
-  let wordIdx = 0;
-  let charIdx = 0;
-  let deleting = false;
-  let pausing  = false;
-
-  const TYPE_SPEED   = 90;   // ms per char typed
-  const DELETE_SPEED = 45;   // ms per char deleted  (faster delete feels snappier)
-  const PAUSE_AFTER  = 1600; // pause when word is fully shown
-  const PAUSE_BEFORE = 250;  // brief pause before typing next word
-
-  function setLang(lang) {
-    if (!helloLangLabel) return;
-    helloLangLabel.textContent = lang;
-    helloLangLabel.style.opacity = "0.55";
-  }
-
-  setLang(words[0].lang);
-
-  function tick() {
-    if (pausing) return;
-
-    const { chars } = words[wordIdx];
-
-    if (!deleting) {
-      charIdx++;
-      display.textContent = chars.slice(0, charIdx).join("");
-
-      if (charIdx === chars.length) {
-        // Word fully typed - pause, then start deleting
-        pausing = true;
-        setTimeout(() => { pausing = false; deleting = true; tick(); }, PAUSE_AFTER);
-        return;
-      }
-      // Slight speed jitter for a human feel
-      const jitter = Math.random() * 40 - 20;
-      setTimeout(tick, TYPE_SPEED + jitter);
-    } else {
-      charIdx--;
-      display.textContent = chars.slice(0, charIdx).join("");
-
-      if (charIdx === 0) {
-        // Move to next word
-        deleting = false;
-        wordIdx = (wordIdx + 1) % words.length;
-        setLang(words[wordIdx].lang);
-        pausing = true;
-        setTimeout(() => { pausing = false; tick(); }, PAUSE_BEFORE);
-        return;
-      }
-      setTimeout(tick, DELETE_SPEED);
-    }
-  }
-
-  // Small initial delay so the word appears after the heading animates in
-  setTimeout(tick, 600);
 }
 
 function dismissLoader() {
@@ -811,74 +700,5 @@ if (contactForm) {
   document.querySelectorAll('input[name="budget"]').forEach((radio) => {
     radio.addEventListener("change", clearBudgetError);
   });
-}
-      // GSAP HERO ENTRANCE
-if (false) {
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Word-by-word reveal
-      gsap.to(".intro-eyebrow", {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        delay: 0.2,
-        ease: "power2.out",
-      });
-      gsap.to(".w-inner", {
-        y: 0,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power4.out",
-        delay: 0.4,
-      });
-      gsap.to(".intro-sub", { opacity: 1, duration: 0.9, delay: 1.1 });
-      gsap.to(".name-doodle", { opacity: 1, duration: 0.7, delay: 1.6 });
-
-      // Scroll-triggered passion labels
-      gsap.utils.toArray(".passion-label").forEach((el) => {
-        gsap.to(el, {
-          opacity: 1,
-          x: 0,
-          duration: 0.7,
-          ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 88%", once: true },
-        });
-      });
-      gsap.utils.toArray(".passion-h2").forEach((el) => {
-        gsap.to(el, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 88%", once: true },
-        });
-      });
-
-      // Generic scroll reveals
-      document.querySelectorAll(".sr,.sr-l,.sr-r,.sr-s").forEach((el) => {
-        ScrollTrigger.create({
-          trigger: el,
-          start: "top 88%",
-          once: true,
-          onEnter: () => el.classList.add("vis"),
-        });
-      });
-
-      // POLAROID hover tilt
-      document.querySelectorAll(".polaroid").forEach((pol, i) => {
-        const base = ["-8deg", "5deg", "2deg", "-6deg"][i] || "0deg";
-        pol.addEventListener("mousemove", (e) => {
-          const r = pol.getBoundingClientRect();
-          const cx = r.left + r.width / 2,
-            cy = r.top + r.height / 2;
-          const dx = ((e.clientX - cx) / r.width) * 12;
-          const dy = ((e.clientY - cy) / r.height) * 12;
-          pol.style.transform = `rotate(${dx}deg) translateY(-8px) scale(1.04)`;
-        });
-        pol.addEventListener("mouseleave", () => {
-          pol.style.transform = `rotate(${base}) translateY(0) scale(1)`;
-          pol.style.transition = "transform .5s cubic-bezier(.34,1.56,.64,1)";
-        });
-      });
 }
 }
