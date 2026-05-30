@@ -46,8 +46,9 @@ export default function ContactSection() {
         }}
         id="fstk2"
       >
-        <SiteIcon name="cursor" size={16} /> drag me!
+        <SiteIcon name="palm" size={16} /> drag me!
       </div>
+      
       <div
         className="f-sticker sr d2"
         style={{ bottom: "18%", right: "6%", transform: "rotate(-2deg)" }}

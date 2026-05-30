@@ -4,7 +4,7 @@ A React and Vite portfolio website for Prajakta Bansod, focused on full-stack UI
 
 ## Overview
 
-This project is a single-page portfolio built with React. It uses animated hero interactions, smooth scrolling, project detail routes, reusable section components, and static assets served from the `public` and `asset` folders.
+This project is a single-page portfolio built with React. It uses animated hero interactions, smooth scrolling, project detail routes, reusable section components, and static assets served from `public/asset/`.
 
 The production build is generated into `dist/`, which is the folder used by static hosting platforms such as Vercel, Netlify, or any static web server.
 
@@ -36,9 +36,6 @@ public/
   _headers                        Static host headers
   _redirects                      Static host fallback redirects
   robots.txt                      Search crawler rules
-
-projects/
-  */index.html                    Static project demo pages
 
 dist/                             Generated production build, not committed
 ```
@@ -106,7 +103,6 @@ The repository includes `vercel.json`, `public/_redirects`, and `public/_headers
 
 - Do not commit `node_modules/`, `dist/`, logs, reports, or local temporary files.
 - Keep images that must be available by URL inside `public/asset/`.
-- Keep source-only assets in `asset/` if they are imported or copied during development.
 - Update project content from the files inside `src/data/`.
 - Update page sections from `src/sections/home/`.
 
