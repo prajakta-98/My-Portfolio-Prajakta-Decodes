@@ -34,6 +34,7 @@ export function runHomePageEffects() {
       sticker.style.bottom = "auto";
       sticker.style.transition = "none";
       sticker.style.zIndex = "50";
+      sticker.style.transform = "none";
       sticker.classList.add("dragging");
 
       offsetX = e.clientX - rect.left;

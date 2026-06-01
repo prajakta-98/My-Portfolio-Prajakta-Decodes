@@ -13783,8 +13783,8 @@ canvas {
   }
 
   #contact .f-sticker {
-    right: auto !important;
-    bottom: auto !important;
+    right: auto;
+    bottom: auto;
     display: inline-flex;
     max-width: calc(100vw - 2rem);
     min-height: 38px;
@@ -13792,23 +13792,28 @@ canvas {
     font-size: 0.9rem;
     line-height: 1;
     opacity: 1 !important;
-    transform: none !important;
+    transform: none;
     z-index: 20;
   }
 
+  #contact .f-sticker.dragging {
+    transform: none !important;
+    z-index: 80 !important;
+  }
+
   #fstk1 {
-    top: 1.2rem !important;
-    left: var(--section-pad-x) !important;
+    top: 1.2rem;
+    left: var(--section-pad-x);
   }
 
   #fstk2 {
-    top: 1.2rem !important;
-    left: calc(var(--section-pad-x) + 10rem) !important;
+    top: 1.2rem;
+    left: calc(var(--section-pad-x) + 10rem);
   }
 
   #fstk3 {
-    top: 4rem !important;
-    left: var(--section-pad-x) !important;
+    top: 4rem;
+    left: var(--section-pad-x);
   }
 
   .modern-footer {
@@ -13975,18 +13980,18 @@ canvas {
   #fstk1,
   #fstk2,
   #fstk3 {
-    left: var(--section-pad-x) !important;
+    left: var(--section-pad-x);
   }
 
   #fstk1 {
-    top: 1.15rem !important;
+    top: 1.15rem;
   }
 
   #fstk2 {
-    top: 4.15rem !important;
+    top: 4.15rem;
   }
 
   #fstk3 {
-    top: 7.15rem !important;
+    top: 7.15rem;
   }
 }
