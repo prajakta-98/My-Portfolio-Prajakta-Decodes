@@ -13783,8 +13783,8 @@ canvas {
   }
 
   #contact .f-sticker {
-    right: auto;
-    bottom: auto;
+    right: auto !important;
+    bottom: auto !important;
     display: inline-flex;
     max-width: calc(100vw - 2rem);
     min-height: 38px;
