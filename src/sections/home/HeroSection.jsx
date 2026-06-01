@@ -372,6 +372,11 @@ export default function HeroSection() {
     ];
   };
 
+  const releaseFromControl = (event) => {
+    event.stopPropagation();
+    releaseHeading();
+  };
+
   return (
     <motion.section
       id="home-hero"
@@ -478,6 +483,9 @@ export default function HeroSection() {
               type="button"
               className="hero-release"
               aria-label="Restore heading"
+              onPointerDownCapture={releaseFromControl}
+              onMouseDownCapture={(event) => event.stopPropagation()}
+              onTouchStartCapture={(event) => event.stopPropagation()}
               onClick={releaseHeading}
             >
               <svg
