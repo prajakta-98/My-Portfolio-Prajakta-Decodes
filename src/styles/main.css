@@ -4396,13 +4396,17 @@ button:focus-visible .button-chevron {
   grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1.28fr);
   gap: clamp(1rem, 2.2vw, 1.5rem);
   align-items: center;
-  min-height: 0;
+  min-height: clamp(24rem, 34vw, 28rem);
   padding: clamp(0.85rem, 2vw, 1.1rem);
   border: 1px solid rgba(245, 238, 216, 0.09);
   border-radius: 8px;
   background:
     radial-gradient(circle at 85% 12%, rgba(245, 200, 66, 0.12), transparent 32%),
     rgba(4, 6, 10, 0.42);
+}
+
+.personal-os-panel.is-singing {
+  grid-template-columns: minmax(14rem, 0.78fr) minmax(0, 1.22fr);
 }
 
 .personal-os-copy {
@@ -4532,14 +4536,6 @@ button:focus-visible .button-chevron {
   object-position: center bottom;
 }
 
-.personal-music-player .personal-feature-polaroid img {
-  aspect-ratio: 4 / 5;
-  background:
-    linear-gradient(135deg, rgba(18, 24, 19, 0.94), rgba(8, 10, 9, 0.96));
-  object-fit: contain;
-  object-position: center center;
-}
-
 .personal-polaroid figcaption,
 .personal-feature-polaroid figcaption {
   overflow: hidden;
@@ -4572,7 +4568,7 @@ button:focus-visible .button-chevron {
 }
 
 .personal-recipe-ticket span,
-.personal-player-meta span {
+.playlist-mood-head > span {
   color: rgba(245, 238, 216, 0.6);
   font-family: var(--font-display);
   font-size: 0.66rem;
@@ -4595,19 +4591,150 @@ button:focus-visible .button-chevron {
 }
 
 .personal-music-player {
-  align-content: start;
+  grid-template-columns: minmax(7.6rem, 9rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 0.9rem 1rem;
+  width: 100%;
+  max-width: 35rem;
+  justify-self: end;
+  padding: clamp(0.82rem, 1.7vw, 1rem);
+  border: 1px solid rgba(245, 200, 66, 0.16);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(245, 200, 66, 0.16), transparent 31%),
+    radial-gradient(circle at 88% 18%, rgba(123, 47, 255, 0.2), transparent 34%),
+    linear-gradient(145deg, rgba(13, 13, 20, 0.94), rgba(5, 7, 12, 0.88));
+  box-shadow:
+    inset 0 1px 0 rgba(245, 238, 216, 0.06),
+    0 18px 38px rgba(0, 0, 0, 0.28);
 }
 
-.personal-music-player .personal-feature-polaroid {
-  width: min(100%, 19rem);
-  justify-self: start;
-  transform: rotate(-0.35deg);
-}
-
-.personal-player-console {
+.playlist-cover-art {
+  position: relative;
   display: grid;
-  gap: 0.85rem;
-  align-content: start;
+  place-items: center;
+  min-width: 0;
+  width: 100%;
+  max-width: 9rem;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid rgba(245, 238, 216, 0.14);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 28% 26%, rgba(245, 200, 66, 0.9), transparent 0 1.5rem, rgba(245, 200, 66, 0.18) 1.55rem 4.6rem, transparent 4.7rem),
+    radial-gradient(circle at 78% 74%, rgba(123, 47, 255, 0.72), transparent 0 1.2rem, rgba(123, 47, 255, 0.16) 1.25rem 4.8rem, transparent 4.9rem),
+    linear-gradient(145deg, #161222, #07080d 58%, #17110f);
+  box-shadow: inset 0 1px 0 rgba(245, 238, 216, 0.08);
+}
+
+.playlist-cover-art::before,
+.playlist-cover-art::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.playlist-cover-art::before {
+  inset: 14%;
+  border: 1px solid rgba(245, 238, 216, 0.08);
+  background: repeating-radial-gradient(circle, transparent 0 0.65rem, rgba(245, 238, 216, 0.055) 0.7rem 0.74rem);
+}
+
+.playlist-cover-art::after {
+  right: -18%;
+  bottom: -20%;
+  width: 58%;
+  aspect-ratio: 1;
+  background: rgba(245, 200, 66, 0.2);
+  filter: blur(8px);
+}
+
+.playlist-cover-core {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  gap: 0.3rem;
+  width: min(68%, 6.6rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(245, 238, 216, 0.16);
+  border-radius: 50%;
+  background:
+    linear-gradient(135deg, rgba(245, 200, 66, 0.14), rgba(123, 47, 255, 0.22)),
+    rgba(2, 3, 8, 0.62);
+  color: var(--cream);
+  text-align: center;
+}
+
+.playlist-cover-core svg {
+  color: var(--yellow);
+}
+
+.playlist-cover-core strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.18rem, 2vw, 1.58rem);
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.playlist-cover-core span {
+  color: rgba(245, 238, 216, 0.64);
+  font-family: var(--hand);
+  font-size: 0.88rem;
+  line-height: 1;
+}
+
+.playlist-mood-card {
+  display: grid;
+  gap: 0.62rem;
+  align-content: center;
+  min-width: 0;
+}
+
+.playlist-mood-head h4 {
+  margin: 0.28rem 0 0;
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: clamp(1.28rem, 2vw, 1.72rem);
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.playlist-mood-head p {
+  max-width: 28rem;
+  margin: 0.5rem 0 0;
+  color: rgba(245, 238, 216, 0.72);
+  font-size: 0.88rem;
+  line-height: 1.42;
+}
+
+.playlist-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+}
+
+.playlist-tags span {
+  padding: 0.32rem 0.48rem;
+  border: 1px solid rgba(245, 238, 216, 0.1);
+  border-radius: 999px;
+  background: rgba(245, 238, 216, 0.055);
+  color: rgba(245, 238, 216, 0.76);
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.playlist-player-deck {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 0.72rem;
   min-width: 0;
 }
 
@@ -4616,8 +4743,8 @@ button:focus-visible .button-chevron {
   display: flex;
   align-items: center;
   gap: 0.18rem;
-  min-height: 4.4rem;
-  padding: 0.9rem 1rem;
+  min-height: 3.6rem;
+  padding: 0.72rem 0.85rem;
   border: 1px solid rgba(245, 200, 66, 0.24);
   border-radius: 6px;
   background:
@@ -4626,24 +4753,13 @@ button:focus-visible .button-chevron {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
 
-.personal-waveform::before {
-  content: "";
-  position: absolute;
-  right: 1rem;
-  bottom: 0.62rem;
-  left: 1rem;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--yellow) 42%, rgba(245, 238, 216, 0.18) 42%);
-}
-
 .personal-waveform span {
   position: relative;
   z-index: 1;
   flex: 1 1 0;
   min-width: 0.16rem;
   max-width: 0.38rem;
-  height: calc(0.32rem + var(--level) * 0.17rem);
+  height: calc(0.28rem + var(--level) * 0.13rem);
   border-radius: 999px;
   background: rgba(245, 238, 216, 0.28);
   transform-origin: center;
@@ -4656,17 +4772,84 @@ button:focus-visible .button-chevron {
   box-shadow: 0 0 12px rgba(245, 200, 66, 0.24);
 }
 
-.personal-player-meta {
-  display: grid;
-  gap: 0.22rem;
+.playlist-progress {
+  height: 0.34rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(245, 238, 216, 0.12);
 }
 
-.personal-player-meta strong {
+.playlist-progress span {
+  display: block;
+  width: 46%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--yellow), var(--purple-l));
+  box-shadow: 0 0 14px rgba(245, 200, 66, 0.28);
+}
+
+.playlist-player-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.playlist-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.46rem;
+  color: rgba(245, 238, 216, 0.78);
+}
+
+.playlist-controls span {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(245, 238, 216, 0.12);
+  border-radius: 50%;
+  background: rgba(245, 238, 216, 0.06);
+}
+
+.playlist-controls .is-main-control {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-color: rgba(245, 200, 66, 0.36);
+  background: var(--yellow);
+  color: #17130d;
+}
+
+.playlist-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.45rem;
+  padding: 0.72rem 0.9rem;
+  border: 1px solid rgba(245, 200, 66, 0.34);
+  border-radius: 999px;
+  background: rgba(245, 200, 66, 0.12);
   color: var(--yellow);
-  font-family: var(--hand);
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
   line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.playlist-cta:hover,
+.playlist-cta:focus-visible {
+  background: var(--yellow);
+  color: #17130d;
+  transform: translateY(-1px);
 }
 
 @keyframes personalWave {
@@ -5225,12 +5408,13 @@ button:focus-visible .button-chevron {
   }
 
   .personal-os-dock,
-  .personal-os-panel {
+  .personal-os-panel,
+  .personal-os-panel.is-singing {
     grid-template-columns: 1fr;
   }
 
   .personal-os-panel {
-    min-height: 0;
+    min-height: clamp(38rem, 74vw, 44rem);
   }
 
   .camera-interest-polaroid {
@@ -5291,6 +5475,7 @@ button:focus-visible .button-chevron {
   }
 
   .personal-os-panel {
+    min-height: clamp(40rem, 122vw, 48rem);
     padding: 0.82rem;
   }
 
@@ -5318,6 +5503,30 @@ button:focus-visible .button-chevron {
   .personal-recipe-ticket,
   .personal-music-player {
     grid-template-columns: 1fr;
+  }
+
+  .playlist-cover-art {
+    width: min(100%, 12rem);
+    max-width: 12rem;
+    min-height: auto;
+    justify-self: center;
+  }
+
+  .playlist-mood-card {
+    gap: 0.72rem;
+  }
+
+  .playlist-player-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .playlist-controls {
+    justify-content: center;
+  }
+
+  .playlist-cta {
+    width: 100%;
   }
 
   .personal-polaroid figcaption,

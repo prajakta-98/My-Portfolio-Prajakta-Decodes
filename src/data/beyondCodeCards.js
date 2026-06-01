@@ -6,21 +6,26 @@ const beyondCodeCards = [
     description: "I notice light, composition, and small visual details.",
     image: "/asset/SunsetPhoto.jpeg",
     imageAlt: "Golden hour photograph by Prajakta Bansod",
-    supportingImages: [
+    tabImages: [
       {
-        src: "/asset/StreetLight.jpg",
-        alt: "Street light photograph",
-        caption: "street light",
+        src: "/asset/Sunset.jpg",
+        alt: "Sunset photograph",
+        caption: "golden hour",
       },
       {
-        src: "/asset/Flower2.jpg",
-        alt: "Close-up of a flower with vibrant colors",
-        caption: "flower power, up close",
-      },
-      {
-        src: "/asset/Coffee.jpg",
-        alt: "Coffee photograph",
+        src: "/asset/BahamasFlower.jpg",
+        alt: "Flower photograph",
         caption: "small details",
+      },
+      {
+        src: "/asset/Flower1.jpg",
+        alt: "Close-up flower photograph",
+        caption: "soft detail study",
+      },
+      {
+        src: "/asset/Coffee2.jpg",
+        alt: " Coffee photograph",
+        caption: "Coffee is my fuel",
       },
     ],
     details: ["light", "framing", "balance"],
@@ -32,6 +37,13 @@ const beyondCodeCards = [
     description: "I enjoy process, patience, and creative experimentation.",
     image: "/asset/CookingResult.jpg",
     imageAlt: "Home-cooked dish plated by Prajakta Bansod",
+    tabImages: [
+      {
+        src: "/asset/Cooking.jpg",
+        alt: "Cooking ingredients and process photograph",
+        caption: "in progress",
+      },
+    ],
     details: ["prep slowly", "taste often", "adjust freely"],
   },
   {
@@ -42,6 +54,13 @@ const beyondCodeCards = [
       "I bring rhythm, emotion, and expression into the way I create.",
     image: "/asset/Singing.jpg",
     imageAlt: "Portrait of Prajakta Bansod",
+    playlist: {
+      title: "Quiet Performance Mode",
+      supportLine:
+        "A personal soundtrack for focus, feeling, and a little drama.",
+      href: "https://open.spotify.com/playlist/6qcxVVHQGvlG2ODow8NfCa?si=QDPkzYMSThu834LtPwPJqQ",
+      ctaLabel: "Open Playlist ↗",
+    },
     details: ["rhythm", "emotion", "story"],
   },
 ];

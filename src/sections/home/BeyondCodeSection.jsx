@@ -38,7 +38,7 @@ export default function BeyondCodeSection() {
       imageAlt: photography.imageAlt,
       description: photography.description,
       details: photography.details,
-      supportingImages: photography.supportingImages,
+      tabImages: photography.tabImages,
     },
     {
       kind: "cooking",
@@ -50,6 +50,7 @@ export default function BeyondCodeSection() {
       imageAlt: cooking.imageAlt,
       description: cooking.description,
       details: cooking.details,
+      tabImages: cooking.tabImages,
     },
     {
       kind: "singing",
@@ -61,10 +62,29 @@ export default function BeyondCodeSection() {
       imageAlt: singing.imageAlt,
       description: singing.description,
       details: singing.details,
+      tabImages: singing.tabImages,
+      playlist: singing.playlist,
     },
   ];
   const activeApp =
     personalApps.find((app) => app.kind === activeInterest) ?? personalApps[0];
+  const activeTabPhotos = activeApp.tabImages?.length
+    ? activeApp.tabImages
+    : [
+        {
+          src: activeApp.image,
+          alt: activeApp.imageAlt,
+          caption: activeApp.label,
+        },
+      ];
+  const activeFeaturePhoto = activeTabPhotos[0];
+  const activePlaylist = activeApp.playlist ?? {
+    title: "Quiet Performance Mode",
+    supportLine:
+      "A personal soundtrack for focus, feeling, and a little drama.",
+    href: "https://open.spotify.com/playlist/6qcxVVHQGvlG2ODow8NfCa?si=QDPkzYMSThu834LtPwPJqQ",
+    ctaLabel: "Open Playlist ↗",
+  };
 
   const printedPhotos = [
     {
@@ -174,7 +194,6 @@ export default function BeyondCodeSection() {
                   </div>
                 ))}
               </div>
-
             </figure>
 
             <div className="personal-os" aria-label="Interactive personal OS">
@@ -231,14 +250,7 @@ export default function BeyondCodeSection() {
                     className="personal-camera-roll"
                     aria-label="Photography contact sheet"
                   >
-                    {[
-                      {
-                        src: activeApp.image,
-                        alt: activeApp.imageAlt,
-                        caption: activeApp.caption,
-                      },
-                      ...activeApp.supportingImages,
-                    ].map((photo) => (
+                    {activeTabPhotos.map((photo) => (
                       <figure className="personal-polaroid" key={photo.src}>
                         <img
                           src={photo.src}
@@ -259,12 +271,12 @@ export default function BeyondCodeSection() {
                   >
                     <figure className="personal-feature-polaroid">
                       <img
-                        src={activeApp.image}
-                        alt={activeApp.imageAlt}
+                        src={activeFeaturePhoto.src}
+                        alt={activeFeaturePhoto.alt}
                         loading="lazy"
                         decoding="async"
                       />
-                      <figcaption>{activeApp.caption}</figcaption>
+                      <figcaption>{activeFeaturePhoto.caption}</figcaption>
                     </figure>
                     <div>
                       <span>Prep list</span>
@@ -283,28 +295,64 @@ export default function BeyondCodeSection() {
                     className="personal-music-player"
                     aria-label="Singing mood player"
                   >
-                    <figure className="personal-feature-polaroid">
-                      <img
-                        src={activeApp.image}
-                        alt={activeApp.imageAlt}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <figcaption>{activeApp.caption}</figcaption>
-                    </figure>
-                    <div className="personal-player-console">
+                    <div className="playlist-cover-art" aria-hidden="true">
+                      <div className="playlist-cover-core">
+                        <SiteIcon name="music" size={34} />
+                        <strong>QPM</strong>
+                        <span>mood board</span>
+                      </div>
+                    </div>
+
+                    <div className="playlist-mood-card">
+                      <div className="playlist-mood-head">
+                        <span>Playlist Mood</span>
+                        <h4>{activePlaylist.title}</h4>
+                        <p>{activePlaylist.supportLine}</p>
+                      </div>
+
+                      <div className="playlist-tags" aria-label="Mood tags">
+                        {activeApp.details.map((detail) => (
+                          <span key={detail}>{detail}</span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="playlist-player-deck">
                       <div className="personal-waveform" aria-hidden="true">
                         {musicWaveformLevels.map((level, index) => (
                           <span
                             key={index}
-                            className={index < 14 ? "is-played" : undefined}
+                            className={index < 18 ? "is-played" : undefined}
                             style={{ "--level": level }}
                           ></span>
                         ))}
                       </div>
-                      <div className="personal-player-meta">
-                        <span>Now playing</span>
-                        <strong>{activeApp.caption}</strong>
+
+                      <div className="playlist-progress" aria-hidden="true">
+                        <span></span>
+                      </div>
+
+                      <div className="playlist-player-row">
+                        <div className="playlist-controls" aria-hidden="true">
+                          <span>
+                            <SiteIcon name="chevronLeft" size={15} />
+                          </span>
+                          <span className="is-main-control">
+                            <SiteIcon name="play" size={16} />
+                          </span>
+                          <span>
+                            <SiteIcon name="chevronRight" size={15} />
+                          </span>
+                        </div>
+
+                        <a
+                          className="playlist-cta"
+                          href={activePlaylist.href}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {activePlaylist.ctaLabel}
+                        </a>
                       </div>
                     </div>
                   </div>

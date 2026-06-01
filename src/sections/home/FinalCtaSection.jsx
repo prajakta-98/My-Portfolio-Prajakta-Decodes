@@ -1,12 +1,13 @@
 const trustItems = [
-  ["1+", "Years of experience"],
+  ["1.5+", "Years of experience"],
   ["4", "Live projects shipped"],
   ["MIT", "Certified UI/UX designer"],
   ["MCA", "Master's in Computer Applications"],
   ["24h", "Average reply time"],
 ];
 
-const resumePath = "/asset/prajakta-bansod-resume.pdf";
+const resumeUrl =
+  "https://docs.google.com/document/d/1FRJsIrSjrLJw5nYGrGpvg0pZVnCXBopZ/edit?usp=drive_link&ouid=106543068108250525970&rtpof=true&sd=true";
 
 export default function FinalCtaSection() {
   return (
@@ -40,10 +41,11 @@ export default function FinalCtaSection() {
             Hire Me
           </a>
           <a
-            href={resumePath}
+            href={resumeUrl}
             className="cta-btn-resume"
             id="resume-btn"
-            download
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <svg
               width="16"

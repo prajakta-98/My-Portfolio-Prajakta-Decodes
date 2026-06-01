@@ -552,10 +552,10 @@ export default function HeroSection() {
             View Projects
           </motion.a>
           <motion.a
-            href="https://drive.google.com/file/d/13RQkO5hJcCe2cM1Dp0rHXczJkI5oEKQb/view?usp=drive_link"
+            href="https://docs.google.com/document/d/1FRJsIrSjrLJw5nYGrGpvg0pZVnCXBopZ/edit?usp=drive_link&ouid=106543068108250525970&rtpof=true&sd=true"
             className="kinetic-action-secondary"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
