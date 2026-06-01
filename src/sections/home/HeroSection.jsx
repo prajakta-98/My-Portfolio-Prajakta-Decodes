@@ -479,29 +479,29 @@ export default function HeroSection() {
                 {body.char}
               </span>
             ))}
-            <button
-              type="button"
-              className="hero-release"
-              aria-label="Restore heading"
-              onPointerDownCapture={releaseFromControl}
-              onMouseDownCapture={(event) => event.stopPropagation()}
-              onTouchStartCapture={(event) => event.stopPropagation()}
-              onClick={releaseHeading}
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M7 17L17 7" />
-                <path d="M9 7h8v8" />
-              </svg>
-            </button>
           </div>
+          <button
+            type="button"
+            className="hero-release"
+            aria-label="Restore heading"
+            onPointerDownCapture={releaseFromControl}
+            onMouseDownCapture={(event) => event.stopPropagation()}
+            onTouchStartCapture={(event) => event.stopPropagation()}
+            onClick={releaseHeading}
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M7 17L17 7" />
+              <path d="M9 7h8v8" />
+            </svg>
+          </button>
           <h1
             id="kinetic-hero-title"
             className="kinetic-title"
