@@ -13755,12 +13755,20 @@ canvas {
     min-width: 42px;
   }
 
-  .hero-topbar {
-    display: none;
-  }
-
   .kinetic-hero {
     padding-top: calc(6.8rem + env(safe-area-inset-top, 0px));
+  }
+
+  .hero-topbar {
+    top: calc(4.25rem + env(safe-area-inset-top, 0px));
+    display: grid;
+    grid-template-columns: minmax(7.25rem, 1fr) auto minmax(7.25rem, 1fr);
+    min-height: 3.25rem;
+  }
+
+  .kinetic-pixel-mark {
+    --heart-px: 5px;
+    transform: translateY(0.18rem);
   }
 
   .hero-release {
@@ -13917,12 +13925,47 @@ canvas {
 
 @media (max-width: 430px) {
   #nav {
+    top: 0;
     width: calc(100% - 1rem);
-    padding-inline: 0.65rem;
+    min-height: 52px;
+    padding: 0.42rem 0.65rem;
   }
 
   #nav .nav-logo-text {
     font-size: clamp(0.92rem, 4.7vw, 1rem);
+  }
+
+  #nav .nav-logo {
+    min-height: 34px;
+  }
+
+  #nav .nav-toggle {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .kinetic-hero {
+    --hero-top-y: 3.95rem;
+    padding-top: calc(7.15rem + env(safe-area-inset-top, 0px));
+  }
+
+  .hero-topbar {
+    top: calc(3.9rem + env(safe-area-inset-top, 0px));
+    grid-template-columns: minmax(6.6rem, 1fr) auto minmax(6.6rem, 1fr);
+    min-height: 3rem;
+    gap: 0.45rem;
+  }
+
+  .kinetic-brand {
+    max-width: 7.2rem;
+    font-size: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .kinetic-pixel-mark {
+    --heart-px: 4.5px;
+    transform: translateY(0.2rem);
   }
 
   #contact {
