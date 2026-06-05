@@ -57,25 +57,14 @@ body {
   overflow-x: hidden;
 }
 body.custom-cursor-enabled,
-body.custom-cursor-enabled a,
-body.custom-cursor-enabled button,
-body.custom-cursor-enabled [role="button"],
-body.custom-cursor-enabled [role="link"],
-body.custom-cursor-enabled .intro-polaroid,
-body.custom-cursor-enabled .polaroid,
-body.custom-cursor-enabled .pl-item,
-body.custom-cursor-enabled .mood-tag,
-body.custom-cursor-enabled .stat-pill,
-body.custom-cursor-enabled .work-swap-card,
-body.custom-cursor-enabled .svc-card,
-body.custom-cursor-enabled .social-pill {
-  cursor: none;
+body.custom-cursor-enabled * {
+  cursor: none !important;
 }
 body.custom-cursor-enabled input,
 body.custom-cursor-enabled textarea,
 body.custom-cursor-enabled select,
 body.custom-cursor-enabled [contenteditable="true"] {
-  cursor: text;
+  cursor: text !important;
 }
 body.is-loading {
   overflow: hidden;
