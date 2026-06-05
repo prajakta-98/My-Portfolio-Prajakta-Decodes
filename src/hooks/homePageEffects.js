@@ -97,9 +97,10 @@ function initCustomCursor() {
   let rx = 0;
   let ry = 0;
   let rafId = null;
+  let clickTimer = null;
 
   const moveCursor = (x, y) => {
-    cur.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+    cur.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-6px, -5px)`;
   };
 
   const moveRing = (x, y) => {
@@ -122,15 +123,36 @@ function initCustomCursor() {
     if (!enabled && rafId !== null) {
       cancelAnimationFrame(rafId);
       rafId = null;
-      document.body.classList.remove("custom-cursor-hover", "custom-cursor-text");
+      window.clearTimeout(clickTimer);
+      document.body.classList.remove(
+        "custom-cursor-hover",
+        "custom-cursor-text",
+        "custom-cursor-down",
+        "custom-cursor-pop",
+      );
     }
   };
 
-  document.addEventListener("mousemove", (e) => {
+  const playClick = () => {
+    if (!document.body.classList.contains("custom-cursor-enabled")) return;
+    window.clearTimeout(clickTimer);
+    document.body.classList.add("custom-cursor-down", "custom-cursor-pop");
+    clickTimer = window.setTimeout(() => {
+      document.body.classList.remove("custom-cursor-pop");
+    }, 420);
+  };
+
+  document.addEventListener("pointermove", (e) => {
     if (!document.body.classList.contains("custom-cursor-enabled")) return;
     mx = e.clientX;
     my = e.clientY;
     moveCursor(mx, my);
+  });
+
+  document.addEventListener("pointerdown", playClick);
+
+  document.addEventListener("pointerup", () => {
+    document.body.classList.remove("custom-cursor-down");
   });
 
   document.addEventListener("mouseover", (e) => {
@@ -143,7 +165,12 @@ function initCustomCursor() {
 
   document.addEventListener("mouseout", (e) => {
     if (e.relatedTarget) return;
-    document.body.classList.remove("custom-cursor-hover", "custom-cursor-text");
+    document.body.classList.remove(
+      "custom-cursor-hover",
+      "custom-cursor-text",
+      "custom-cursor-down",
+      "custom-cursor-pop",
+    );
   });
 
   finePointerQuery.addEventListener("change", setEnabled);

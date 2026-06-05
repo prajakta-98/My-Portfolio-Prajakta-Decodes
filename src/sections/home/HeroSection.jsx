@@ -172,9 +172,11 @@ const revealPixels = heartPixels.map(([col, row], index) => ({
   delay: `${index * 0.014}s`,
 }));
 
-const HERO_PHYSICS_EXPAND_MS = 700;
+const HERO_PHYSICS_EXPAND_MS = 760;
 const HERO_PHYSICS_RELEASE_MS = 900;
+const HERO_PHYSICS_REBUILD_MS = 1780;
 const HERO_PHYSICS_STEP = 1000 / 60;
+const HERO_PHYSICS_DROP_STAGGER_MS = 12;
 
 // Uses Matter.js only while the heading is collected, then tears it down on reset.
 function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
@@ -210,35 +212,43 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
     const world = engine.world;
 
     const wallCount = 64;
-    const walls = Array.from({ length: wallCount }).map((_, index) => {
+    const walls = Array.from({ length: wallCount }).flatMap((_, index) => {
       const angle = (index / wallCount) * Math.PI * 2;
+      if (Math.sin(angle) < -0.64) return [];
+
       const wallWidth = (2 * Math.PI * radius) / wallCount + 8;
-      return Matter.Bodies.rectangle(
-        cx + Math.cos(angle) * radius,
-        cy + Math.sin(angle) * radius,
-        wallWidth,
-        18,
-        {
-          isStatic: true,
-          angle: angle + Math.PI / 2,
-          render: { visible: false },
-        },
-      );
+      return [
+        Matter.Bodies.rectangle(
+          cx + Math.cos(angle) * radius,
+          cy + Math.sin(angle) * radius,
+          wallWidth,
+          18,
+          {
+            isStatic: true,
+            angle: angle + Math.PI / 2,
+            render: { visible: false },
+          },
+        ),
+      ];
     });
 
     const letterBodies = [];
     measuredLetters.forEach(({ char, index, rect }) => {
-      const bodyWidth = Math.max(10, rect.width * 0.34);
-      const bodyHeight = Math.max(15, rect.height * 0.34);
-      const columnCount = 12;
+      const bodyWidth = Math.max(14, rect.width * 0.44);
+      const bodyHeight = Math.max(22, rect.height * 0.42);
+      const columnCount = 13;
       const column = index % columnCount;
       const row = Math.floor(index / columnCount);
       const normalizedColumn = column - (columnCount - 1) / 2;
       const x =
         cx +
-        normalizedColumn * radius * 0.112 +
-        ((row % 2) - 0.5) * radius * 0.052;
-      const y = cy - radius * 0.74 + row * bodyHeight * 0.46;
+        normalizedColumn * radius * 0.092 +
+        Math.sin(index * 1.72) * radius * 0.052;
+      const y =
+        cy -
+        radius * 1.18 -
+        (row % 4) * bodyHeight * 0.56 -
+        Math.floor(row / 4) * bodyHeight * 0.2;
       const body = Matter.Bodies.rectangle(
         x,
         y,
@@ -255,25 +265,14 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
         },
       );
       Matter.Body.setVelocity(body, {
-        x: normalizedColumn * 0.008,
-        y: 0.2 + (index % 5) * 0.045,
+        x: normalizedColumn * 0.08 + Math.sin(index * 0.9) * 0.42,
+        y: 5.2 + (index % 7) * 0.38,
       });
-      Matter.Body.setAngularVelocity(body, ((index % 9) - 4) * 0.034);
+      Matter.Body.setAngularVelocity(body, ((index % 9) - 4) * 0.075);
       letterBodies.push({ body, char, id: `${index}` });
     });
 
-    const mouse = Matter.Mouse.create(stage);
-    mouse.pixelRatio = window.devicePixelRatio || 1;
-    const mouseConstraint = Matter.MouseConstraint.create(engine, {
-      mouse,
-      constraint: {
-        stiffness: 0.14,
-        damping: 0.12,
-        render: { visible: false },
-      },
-    });
-
-    Matter.Composite.add(world, [...walls, mouseConstraint]);
+    Matter.Composite.add(world, walls);
 
     let frameId = 0;
     const activeBodies = [];
@@ -282,7 +281,7 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
         activeBodies.push(item);
         Matter.Composite.add(world, item.body);
         syncBodies();
-      }, index * 18),
+      }, index * HERO_PHYSICS_DROP_STAGGER_MS),
     );
     let lastTime = performance.now();
     let accumulator = 0;
@@ -315,7 +314,6 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
     return () => {
       bodyTimers.forEach((timer) => window.clearTimeout(timer));
       cancelAnimationFrame(frameId);
-      Matter.Mouse.clearSourceEvents(mouse);
       Matter.Composite.clear(world, false);
       Matter.Engine.clear(engine);
     };
@@ -325,6 +323,8 @@ function useHeroPhysics(isActive, stageRef, letterRefs, setBodies) {
 export default function HeroSection() {
   const [physicsMode, setPhysicsMode] = useState("idle");
   const [physicsBodies, setPhysicsBodies] = useState([]);
+  const [releaseLetters, setReleaseLetters] = useState([]);
+  const headingStageRef = useRef(null);
   const physicsStageRef = useRef(null);
   const letterRefs = useRef([]);
   const phaseTimersRef = useRef([]);
@@ -352,6 +352,7 @@ export default function HeroSection() {
     if (physicsMode !== "idle") return;
     clearPhaseTimers();
     setPhysicsBodies([]);
+    setReleaseLetters([]);
     setPhysicsMode("expanding");
     phaseTimersRef.current = [
       window.setTimeout(() => {
@@ -360,15 +361,77 @@ export default function HeroSection() {
     ];
   };
 
+  const buildReleaseLetters = () => {
+    const stage = headingStageRef.current;
+    const world = physicsStageRef.current;
+    if (!stage || !world || !physicsBodies.length) return [];
+
+    const stageRect = stage.getBoundingClientRect();
+    const worldRect = world.getBoundingClientRect();
+    return physicsBodies
+      .map((body, order) => {
+        const letterNode = letterRefs.current[Number(body.id)];
+        if (!(letterNode instanceof HTMLElement)) return null;
+
+        const physicsNode = world.querySelector(
+          `[data-physics-id="${body.id}"]`,
+        );
+        const targetRect = letterNode.getBoundingClientRect();
+        const sourceRect =
+          physicsNode instanceof HTMLElement
+            ? physicsNode.getBoundingClientRect()
+            : null;
+        const startX = sourceRect
+          ? sourceRect.left - stageRect.left + sourceRect.width / 2
+          : worldRect.left - stageRect.left + body.x;
+        const startY = sourceRect
+          ? sourceRect.top - stageRect.top + sourceRect.height / 2
+          : worldRect.top - stageRect.top + body.y;
+        const endX = targetRect.left - stageRect.left + targetRect.width / 2;
+        const endY = targetRect.top - stageRect.top + targetRect.height / 2;
+        const startScale =
+          sourceRect && targetRect.height
+            ? Math.min(
+                0.86,
+                Math.max(0.22, sourceRect.height / targetRect.height),
+              )
+            : 0.42;
+        const spread = order - (physicsBodies.length - 1) / 2;
+        const arcX = startX + Math.sin(order * 1.23) * 44 + spread * 0.52;
+        const arcY = Math.min(startY, endY) - 118 - (order % 7) * 6;
+
+        return {
+          id: body.id,
+          char: body.char,
+          style: {
+            "--release-start-x": `${startX}px`,
+            "--release-start-y": `${startY}px`,
+            "--release-arc-x": `${arcX}px`,
+            "--release-arc-y": `${arcY}px`,
+            "--release-end-x": `${endX}px`,
+            "--release-end-y": `${endY}px`,
+            "--release-start-rotate": `${body.angle}rad`,
+            "--release-end-rotate": `${((order % 9) - 4) * 2.5}deg`,
+            "--release-start-scale": startScale.toFixed(3),
+            "--release-arc-scale": Math.min(1, startScale + 0.18).toFixed(3),
+            "--release-delay": `${Math.min(order * 0.0035, 0.26)}s`,
+          },
+        };
+      })
+      .filter(Boolean);
+  };
+
   const releaseHeading = () => {
     if (physicsMode !== "collecting") return;
     clearPhaseTimers();
+    setReleaseLetters(buildReleaseLetters());
     setPhysicsMode("releasing");
     phaseTimersRef.current = [
       window.setTimeout(() => {
         setPhysicsBodies([]);
+        setReleaseLetters([]);
         setPhysicsMode("idle");
-      }, HERO_PHYSICS_RELEASE_MS),
+      }, HERO_PHYSICS_REBUILD_MS),
     ];
   };
 
@@ -454,7 +517,7 @@ export default function HeroSection() {
       </div>
       <div className={`kinetic-hero-copy is-physics-${physicsMode}`}>
         <p className="kinetic-kicker kinetic-reveal">Full-Stack UI Developer</p>
-        <div className="kinetic-heading-stage">
+        <div className="kinetic-heading-stage" ref={headingStageRef}>
           <div className="hero-pixel-loader" aria-hidden="true">
             {revealPixels.map((pixel, index) => (
               <span
@@ -472,11 +535,23 @@ export default function HeroSection() {
               <span
                 className="hero-physics-letter"
                 key={body.id}
+                data-physics-id={body.id}
                 style={{
                   transform: `translate3d(${body.x}px, ${body.y}px, 0) translate(-50%, -50%) rotate(${body.angle}rad)`,
                 }}
               >
                 {body.char}
+              </span>
+            ))}
+          </div>
+          <div className="hero-release-layer" aria-hidden="true">
+            {releaseLetters.map((letter) => (
+              <span
+                className="hero-release-letter"
+                key={letter.id}
+                style={letter.style}
+              >
+                {letter.char}
               </span>
             ))}
           </div>

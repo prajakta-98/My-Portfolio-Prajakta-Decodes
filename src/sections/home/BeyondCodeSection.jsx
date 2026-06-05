@@ -82,7 +82,7 @@ export default function BeyondCodeSection() {
     title: "Quiet Performance Mode",
     supportLine:
       "A personal soundtrack for focus, feeling, and a little drama.",
-    href: "https://open.spotify.com/playlist/6qcxVVHQGvlG2ODow8NfCa?si=QDPkzYMSThu834LtPwPJqQ",
+    href: "https://open.spotify.com/playlist/5cfIZWLbFP5bn9C7UfxLbI?si=b18425327532403d",
     ctaLabel: "Open Playlist ↗",
   };
 
