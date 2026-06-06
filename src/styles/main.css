@@ -178,6 +178,10 @@ body.custom-cursor-enabled #cur-ring {
   display: block;
   opacity: 1;
 }
+body.custom-cursor-out #cur,
+body.custom-cursor-out #cur-ring {
+  opacity: 0;
+}
 body.custom-cursor-hover .cursor-arrow {
   transform: rotate(-3deg) scale(1.12);
 }
@@ -1228,6 +1232,7 @@ button:focus-visible .button-chevron {
   --hero-title-weight: 700;
   --hero-title-line-height: 0.9;
   --hero-title-letter-spacing: 0;
+  --hero-title-width: 16.8em;
   position: relative;
   z-index: 2;
   display: grid;
@@ -1283,7 +1288,7 @@ button:focus-visible .button-chevron {
   z-index: 6;
   display: grid;
   justify-items: center;
-  width: min(100%, 980px);
+  width: min(100%, 1080px);
   text-align: center;
   transform: none;
 }
@@ -1300,11 +1305,13 @@ button:focus-visible .button-chevron {
 
 .kinetic-title {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.08em 0.28em;
-  max-width: min(100%, 15em);
+  gap: 0.1em 0.3em;
+  width: min(100%, var(--hero-title-width));
+  max-width: calc(100vw - (var(--hero-edge-x) * 2));
+  margin: 0 auto;
   color: #f7f1de;
   font-family: var(--hero-title-font);
   font-size: var(--hero-title-size);
@@ -1326,7 +1333,7 @@ button:focus-visible .button-chevron {
   display: grid;
   justify-items: center;
   gap: clamp(0.9rem, 1.35vw, 1.2rem);
-  width: min(100%, 980px);
+  width: min(100%, 1080px);
   min-height: clamp(330px, 42svh, 470px);
   padding-top: clamp(1.4rem, 2.8vw, 2.6rem);
   align-content: center;
@@ -1370,7 +1377,11 @@ button:focus-visible .button-chevron {
 .hero-title-word {
   position: relative;
   display: inline-flex;
+  align-items: baseline;
+  flex: 0 1 auto;
+  min-width: max-content;
   white-space: nowrap;
+  line-height: 0.98;
   transform: translate3d(0, 0, 0);
 }
 
@@ -2476,10 +2487,12 @@ button:focus-visible .button-chevron {
     --hero-title-size: clamp(1.85rem, 4vw, 3.55rem);
     --hero-physics-letter-size: clamp(1.06rem, 1.9vw, 1.76rem);
     --hero-title-line-height: 0.98;
+    --hero-title-width: 14.6em;
   }
 
   .kinetic-title {
-    max-width: min(100%, 12.6em);
+    width: min(100%, var(--hero-title-width));
+    max-width: calc(100vw - (var(--hero-edge-x) * 2));
   }
 
   .kinetic-heading-stage {
@@ -2495,6 +2508,7 @@ button:focus-visible .button-chevron {
     --hero-title-size: clamp(1.35rem, 5.7vw, 2.15rem);
     --hero-physics-letter-size: clamp(1.45rem, 6vw, 2.28rem);
     --hero-title-line-height: 1.05;
+    --hero-title-width: 13.4em;
     min-height: 92svh;
     margin-bottom: 0;
     padding-top: 9rem;
@@ -2527,7 +2541,11 @@ button:focus-visible .button-chevron {
     --heart-px: 5px;
   }
 
-  .kinetic-title,
+  .kinetic-title {
+    width: min(calc(100vw - 2.4rem), var(--hero-title-width));
+    max-width: calc(100vw - 2.4rem);
+  }
+
   .hero-physics-letter {
     max-width: calc(100vw - 2.4rem);
   }
@@ -2570,6 +2588,7 @@ button:focus-visible .button-chevron {
     --hero-title-size: clamp(1.1rem, 5vw, 1.5rem);
     --hero-physics-letter-size: clamp(1.18rem, 5.35vw, 1.62rem);
     --hero-title-line-height: 1.08;
+    --hero-title-width: 12.8em;
     min-height: 94svh;
     padding-top: 8.5rem;
   }
@@ -2595,9 +2614,13 @@ button:focus-visible .button-chevron {
     letter-spacing: 0.16em;
   }
 
-  .kinetic-title,
+  .kinetic-title {
+    width: min(calc(100vw - 2rem), var(--hero-title-width));
+    max-width: calc(100vw - 2rem);
+  }
+
   .hero-physics-letter {
-    max-width: min(calc(100vw - 2rem), 11.2em);
+    max-width: calc(100vw - 2rem);
   }
 
   .kinetic-particle {

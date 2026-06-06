@@ -98,6 +98,7 @@ function initCustomCursor() {
   let ry = 0;
   let rafId = null;
   let clickTimer = null;
+  document.body.classList.add("custom-cursor-out");
 
   const moveCursor = (x, y) => {
     cur.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-6px, -5px)`;
@@ -117,6 +118,7 @@ function initCustomCursor() {
   const setEnabled = () => {
     const enabled = finePointerQuery.matches && !reducedMotionQuery.matches;
     document.body.classList.toggle("custom-cursor-enabled", enabled);
+    document.body.classList.toggle("custom-cursor-out", enabled);
     if (enabled && rafId === null) {
       rafId = requestAnimationFrame(animate);
     }
@@ -129,9 +131,26 @@ function initCustomCursor() {
         "custom-cursor-text",
         "custom-cursor-down",
         "custom-cursor-pop",
+        "custom-cursor-out",
       );
     }
   };
+
+  const hideCursor = () => {
+    document.body.classList.add("custom-cursor-out");
+    document.body.classList.remove(
+      "custom-cursor-hover",
+      "custom-cursor-text",
+      "custom-cursor-down",
+      "custom-cursor-pop",
+    );
+  };
+
+  const isInsideViewport = (event) =>
+    event.clientX >= 0 &&
+    event.clientY >= 0 &&
+    event.clientX <= window.innerWidth &&
+    event.clientY <= window.innerHeight;
 
   const playClick = () => {
     if (!document.body.classList.contains("custom-cursor-enabled")) return;
@@ -144,6 +163,11 @@ function initCustomCursor() {
 
   document.addEventListener("pointermove", (e) => {
     if (!document.body.classList.contains("custom-cursor-enabled")) return;
+    if (!isInsideViewport(e)) {
+      hideCursor();
+      return;
+    }
+    document.body.classList.remove("custom-cursor-out");
     mx = e.clientX;
     my = e.clientY;
     moveCursor(mx, my);
@@ -165,13 +189,11 @@ function initCustomCursor() {
 
   document.addEventListener("mouseout", (e) => {
     if (e.relatedTarget) return;
-    document.body.classList.remove(
-      "custom-cursor-hover",
-      "custom-cursor-text",
-      "custom-cursor-down",
-      "custom-cursor-pop",
-    );
+    hideCursor();
   });
+
+  document.documentElement.addEventListener("mouseleave", hideCursor);
+  window.addEventListener("blur", hideCursor);
 
   finePointerQuery.addEventListener("change", setEnabled);
   reducedMotionQuery.addEventListener("change", setEnabled);
