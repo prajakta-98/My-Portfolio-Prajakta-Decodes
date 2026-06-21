@@ -99,6 +99,19 @@ Recommended deployment settings:
 
 The repository includes `vercel.json`, `public/_redirects`, and `public/_headers` so the app can handle client-side routes and static hosting behavior correctly.
 
+### GitHub Actions CI/CD
+
+The workflow in `.github/workflows/ci-cd.yml` runs a clean install and production build for pull requests and pushes targeting `main`. A successful push to `main` then deploys the verified `dist/` artifact to Netlify.
+
+Configure these GitHub Actions repository secrets before merging the workflow:
+
+- `NETLIFY_AUTH_TOKEN`: a Netlify personal access token with access to the site.
+- `NETLIFY_SITE_ID`: the API ID shown in the Netlify site's configuration.
+
+Create a GitHub environment named `production` and restrict it to the `main` branch. Optional required reviewers can be added to make production deployment a manual approval step.
+
+If the Netlify site is also connected directly to GitHub, disable automatic production deploys in Netlify to prevent duplicate deployments.
+
 ## Important Notes
 
 - Do not commit `node_modules/`, `dist/`, logs, reports, or local temporary files.
