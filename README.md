@@ -103,6 +103,8 @@ The repository includes `vercel.json`, `public/_redirects`, and `public/_headers
 
 The workflow in `.github/workflows/ci-cd.yml` runs a clean install and production build for pull requests and pushes targeting `main`. Pull requests deploy the verified `dist/` artifact as a Netlify deploy preview and comment the preview URL on the PR. A successful push to `main` deploys the verified artifact to Netlify production.
 
+Use a short-lived feature branch to verify preview deployments before merging workflow changes.
+
 Configure these GitHub Actions repository secrets before merging the workflow:
 
 - `NETLIFY_AUTH_TOKEN`: a Netlify personal access token with access to the site.
