@@ -58,9 +58,7 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment:
-      name: preview
-      url: ${{ steps.deploy-preview.outputs.deploy-url }}
+    environment: preview
 
     steps:
       - name: Checkout repository

@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "node build.mjs",
-    "deploy:netlify:preview": "netlify deploy --dir=dist --no-build --context=deploy-preview --json",
-    "deploy:netlify": "netlify deploy --dir=dist --no-build --context=production --prod",
+    "deploy:netlify:preview": "netlify deploy --dir=dist --no-build --json",
+    "deploy:netlify": "netlify deploy --dir=dist --no-build --prod",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
