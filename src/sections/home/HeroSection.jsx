@@ -173,7 +173,6 @@ const revealPixels = heartPixels.map(([col, row], index) => ({
 }));
 
 const HERO_PHYSICS_EXPAND_MS = 760;
-const HERO_PHYSICS_RELEASE_MS = 900;
 const HERO_PHYSICS_REBUILD_MS = 1780;
 const HERO_PHYSICS_STEP = 1000 / 60;
 const HERO_PHYSICS_DROP_STAGGER_MS = 12;

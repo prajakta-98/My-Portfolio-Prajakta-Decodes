@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "node build.mjs",
+    "lint": "eslint .",
     "deploy:netlify:preview": "netlify deploy --dir=dist --no-build --json",
     "deploy:netlify": "netlify deploy --dir=dist --no-build --prod",
     "preview": "vite preview --host 127.0.0.1"
@@ -22,6 +23,11 @@
     "vite": "^7.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.5.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.7.0",
     "netlify-cli": "^26.1.0"
   }
 }
