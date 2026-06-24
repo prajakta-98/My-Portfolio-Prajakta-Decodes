@@ -101,7 +101,7 @@ The repository includes `vercel.json`, `public/_redirects`, and `public/_headers
 
 ### GitHub Actions CI/CD
 
-The workflow in `.github/workflows/ci-cd.yml` runs a clean install and production build for pull requests and pushes targeting `main`. A successful push to `main` then deploys the verified `dist/` artifact to Netlify.
+The workflow in `.github/workflows/ci-cd.yml` runs a clean install and production build for pull requests and pushes targeting `main`. Pull requests deploy the verified `dist/` artifact as a Netlify deploy preview and comment the preview URL on the PR. A successful push to `main` deploys the verified artifact to Netlify production.
 
 Configure these GitHub Actions repository secrets before merging the workflow:
 
@@ -109,6 +109,8 @@ Configure these GitHub Actions repository secrets before merging the workflow:
 - `NETLIFY_SITE_ID`: the API ID shown in the Netlify site's configuration.
 
 Create a GitHub environment named `production` and restrict it to the `main` branch. Optional required reviewers can be added to make production deployment a manual approval step.
+
+Create a GitHub environment named `preview` for pull request deploy previews. Do not add required reviewers to the preview environment unless preview deployments should wait for manual approval.
 
 If the Netlify site is also connected directly to GitHub, disable automatic production deploys in Netlify to prevent duplicate deployments.
 
