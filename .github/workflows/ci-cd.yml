@@ -119,7 +119,6 @@ jobs:
         id: deploy-preview
         run: |
           npm run --silent deploy:netlify:preview -- \
-            --context=deploy-preview \
             --alias=pr-${{ github.event.pull_request.number }} \
             --message="PR #${{ github.event.pull_request.number }} preview for ${{ github.sha }}" > deploy.json
 
